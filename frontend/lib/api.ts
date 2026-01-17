@@ -22,17 +22,17 @@ export async function fetchUpcomingGames(): Promise<Game[]> {
     const games = data.games || [];
     console.log(`[API] Received ${games.length} games from API`);
     
-    // Log injury data for first few games
+    // Log win probabilities for first few games
     if (games.length > 0) {
       games.slice(0, 3).forEach((game: Game) => {
-        if (game.homeInjuredPlayers?.length || game.awayInjuredPlayers?.length) {
-          console.log(`[API] Game ${game.awayTeam} @ ${game.homeTeam}:`, {
-            homeInjuries: game.homeInjuries,
-            homePlayers: game.homeInjuredPlayers?.map(p => p.player),
-            awayInjuries: game.awayInjuries,
-            awayPlayers: game.awayInjuredPlayers?.map(p => p.player)
-          });
-        }
+        console.log(`[API] Game ${game.awayTeam} @ ${game.homeTeam}:`, {
+          baseWinProb: game.baseWinProb,
+          currentWinProb: game.currentWinProb,
+          homeInjuries: game.homeInjuries,
+          homePlayers: game.homeInjuredPlayers?.map(p => p.player),
+          awayInjuries: game.awayInjuries,
+          awayPlayers: game.awayInjuredPlayers?.map(p => p.player)
+        });
       });
     } else {
       console.warn('[API] No games returned from API');

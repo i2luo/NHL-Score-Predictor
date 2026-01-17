@@ -498,10 +498,23 @@ export async function GET(request: Request) {
                 game.baseWinProb = baseProb;
                 game.currentWinProb = baseProb;
                 predictionsApplied++;
+                console.log(`[API] Applied prediction to ${game.awayTeam} @ ${game.homeTeam}: ${baseProb}%`);
+              } else {
+                console.log(`[API] No prediction for ${game.awayTeam} @ ${game.homeTeam} (id: ${game.id})`);
+                if (prediction) {
+                  console.log(`[API] Prediction result:`, prediction);
+                }
               }
             });
             
             console.log(`[API] Applied predictions to ${predictionsApplied} of ${games.length} games`);
+            
+            // Log sample games to verify predictions
+            if (games.length > 0) {
+              games.slice(0, 3).forEach(game => {
+                console.log(`[API] Game ${game.awayTeam} @ ${game.homeTeam}: baseWinProb=${game.baseWinProb}, currentWinProb=${game.currentWinProb}`);
+              });
+            }
           } catch (error: any) {
             console.warn(`[API] Batch prediction failed:`, error.message?.substring(0, 100));
             console.warn(`[API] Games will use default 50% win probability`);

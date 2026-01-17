@@ -112,14 +112,18 @@ export default function Home() {
         onUpdate={(updatedGame) => {
           console.log('[Page] onUpdate called with:', {
             id: updatedGame.id,
+            baseWinProb: updatedGame.baseWinProb,
+            currentWinProb: updatedGame.currentWinProb,
             homeInjuredPlayers: updatedGame.homeInjuredPlayers?.length || 0,
             awayInjuredPlayers: updatedGame.awayInjuredPlayers?.length || 0,
           });
           setSelectedGame(updatedGame);
-          // Update in upcoming games if it exists there
+          // Update in upcoming games if it exists there (create new array to trigger re-render)
           const index = upcomingGames.findIndex(g => g.id === updatedGame.id);
           if (index !== -1) {
-            upcomingGames[index] = updatedGame;
+            const updatedGames = [...upcomingGames];
+            updatedGames[index] = updatedGame;
+            setUpcomingGames(updatedGames);
           }
         }}
       />
