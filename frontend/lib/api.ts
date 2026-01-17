@@ -1,90 +1,103 @@
 import { Game } from '@/types/game';
 
-const API_BASE = '/api/games';
-
+/**
+ * Fetch upcoming games (next 48 hours) from the API
+ */
 export async function fetchUpcomingGames(): Promise<Game[]> {
   try {
-    const url = `${API_BASE}?upcoming=true`;
-    console.log('[API] Fetching upcoming games from:', url);
-    const response = await fetch(url);
-    
-    console.log('[API] Response status:', response.status, response.statusText);
-    console.log('[API] Response ok:', response.ok);
-    
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('[API] Response error:', errorText);
-      throw new Error(`Failed to fetch upcoming games: ${response.status} ${response.statusText} - ${errorText}`);
-    }
-    
-    const data = await response.json();
-    console.log('[API] Response data:', data);
-    const games = data.games || [];
-    console.log(`[API] Received ${games.length} games from API`);
-    
-    // Log win probabilities for first few games
-    if (games.length > 0) {
-      games.slice(0, 3).forEach((game: Game) => {
-        console.log(`[API] Game ${game.awayTeam} @ ${game.homeTeam}:`, {
-          baseWinProb: game.baseWinProb,
-          currentWinProb: game.currentWinProb,
-          homeInjuries: game.homeInjuries,
-          homePlayers: game.homeInjuredPlayers?.map(p => p.player),
-          awayInjuries: game.awayInjuries,
-          awayPlayers: game.awayInjuredPlayers?.map(p => p.player)
-        });
-      });
-    } else {
-      console.warn('[API] No games returned from API');
-    }
-    
-    return games;
-  } catch (error) {
-    console.error('[API] Error fetching upcoming games:', error);
-    // Fallback to empty array or mock data if API fails
-    return [];
-  }
-}
-
-export async function fetchAllFutureGames(): Promise<Game[]> {
-  try {
-    console.log('[API] Fetching all future games from:', API_BASE);
-    const response = await fetch(`${API_BASE}`);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch games: ${response.status} ${response.statusText}`);
-    }
-    const data = await response.json();
-    const games = data.games || [];
-    console.log(`[API] Received ${games.length} games from API`);
-    
-    // Log injury data for games with NYR
-    const nyrGames = games.filter((g: Game) => g.homeTeam === 'NYR' || g.awayTeam === 'NYR').slice(0, 2);
-    nyrGames.forEach((game: Game) => {
-      console.log(`[API] NYR Game ${game.awayTeam} @ ${game.homeTeam}:`, {
-        homeInjuries: game.homeInjuries,
-        homePlayers: game.homeInjuredPlayers?.map(p => p.player),
-        awayInjuries: game.awayInjuries,
-        awayPlayers: game.awayInjuredPlayers?.map(p => p.player)
-      });
+    console.log('[API Client] Fetching upcoming games from /api/games?upcoming=true');
+    const response = await fetch('/api/games?upcoming=true', {
+      cache: 'no-store', // Always fetch fresh data
     });
     
+    if (!response.ok) {
+      console.error('[API Client] API response not OK:', response.status, response.statusText);
+      throw new Error(`API returned ${response.status}: ${response.statusText}`);
+    }
+    
+    const data = await response.json();
+    console.log('[API Client] Received response:', {
+      gamesCount: data.games?.length || 0,
+      hasError: !!data.error,
+    });
+    
+    if (data.error) {
+      console.error('[API Client] API returned error:', data.error);
+      throw new Error(data.error);
+    }
+    
+    const games: Game[] = data.games || [];
+    
+    // Debug: Log win probabilities for first few games
+    if (games.length > 0) {
+      console.log('[API Client] Sample games with win probabilities:');
+      games.slice(0, 3).forEach(game => {
+        console.log(`  ${game.awayTeam} @ ${game.homeTeam}: baseWinProb=${game.baseWinProb}, currentWinProb=${game.currentWinProb}`);
+      });
+      
+      // Check if any games have non-default probabilities
+      const gamesWithPredictions = games.filter(g => g.baseWinProb !== 50 && g.baseWinProb !== undefined);
+      console.log(`[API Client] Games with predictions (not 50%): ${gamesWithPredictions.length} of ${games.length}`);
+      
+      if (gamesWithPredictions.length === 0 && games.length > 0) {
+        console.warn('[API Client] ⚠️ WARNING: All games have default 50% probability! Predictions may not be working.');
+      }
+    }
+    
     return games;
   } catch (error) {
-    console.error('[API] Error fetching games:', error);
-    return [];
+    console.error('[API Client] Error fetching upcoming games:', error);
+    throw error;
   }
 }
 
-export async function fetchGamesByTeam(team: string): Promise<Game[]> {
+/**
+ * Fetch all future games from the API
+ */
+export async function fetchAllFutureGames(): Promise<Game[]> {
   try {
-    const response = await fetch(`${API_BASE}?team=${team}`);
+    console.log('[API Client] Fetching all future games from /api/games');
+    const response = await fetch('/api/games', {
+      cache: 'no-store', // Always fetch fresh data
+    });
+    
     if (!response.ok) {
-      throw new Error('Failed to fetch team games');
+      console.error('[API Client] API response not OK:', response.status, response.statusText);
+      throw new Error(`API returned ${response.status}: ${response.statusText}`);
     }
+    
     const data = await response.json();
-    return data.games || [];
+    console.log('[API Client] Received response:', {
+      gamesCount: data.games?.length || 0,
+      hasError: !!data.error,
+    });
+    
+    if (data.error) {
+      console.error('[API Client] API returned error:', data.error);
+      throw new Error(data.error);
+    }
+    
+    const games: Game[] = data.games || [];
+    
+    // Debug: Log win probabilities for first few games
+    if (games.length > 0) {
+      console.log('[API Client] Sample games with win probabilities:');
+      games.slice(0, 3).forEach(game => {
+        console.log(`  ${game.awayTeam} @ ${game.homeTeam}: baseWinProb=${game.baseWinProb}, currentWinProb=${game.currentWinProb}`);
+      });
+      
+      // Check if any games have non-default probabilities
+      const gamesWithPredictions = games.filter(g => g.baseWinProb !== 50 && g.baseWinProb !== undefined);
+      console.log(`[API Client] Games with predictions (not 50%): ${gamesWithPredictions.length} of ${games.length}`);
+      
+      if (gamesWithPredictions.length === 0 && games.length > 0) {
+        console.warn('[API Client] ⚠️ WARNING: All games have default 50% probability! Predictions may not be working.');
+      }
+    }
+    
+    return games;
   } catch (error) {
-    console.error('Error fetching team games:', error);
-    return [];
+    console.error('[API Client] Error fetching all future games:', error);
+    throw error;
   }
 }

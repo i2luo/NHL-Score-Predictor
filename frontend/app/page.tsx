@@ -26,6 +26,21 @@ export default function Home() {
         const games = await fetchUpcomingGames();
         console.log(`[Frontend] Received ${games.length} games`);
         
+        // Check win probabilities
+        const gamesWithPredictions = games.filter(g => g.baseWinProb !== 50 && g.baseWinProb !== undefined);
+        console.log(`[Frontend] Games with predictions (not 50%): ${gamesWithPredictions.length} of ${games.length}`);
+        
+        if (games.length > 0) {
+          console.log('[Frontend] Sample games with probabilities:');
+          games.slice(0, 3).forEach(game => {
+            console.log(`[Frontend]   ${game.awayTeam} @ ${game.homeTeam}: baseWinProb=${game.baseWinProb}, currentWinProb=${game.currentWinProb}`);
+          });
+          
+          if (gamesWithPredictions.length === 0) {
+            console.error('[Frontend] ⚠️ WARNING: All games have default 50% probability! Predictions may not be working.');
+          }
+        }
+        
         // Check for injury data in received games
         const gamesWithInjuries = games.filter(g => 
           (g.homeInjuredPlayers && g.homeInjuredPlayers.length > 0) || 

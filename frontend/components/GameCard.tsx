@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { Game } from '@/types/game';
 import { getTeamName } from '@/lib/calculations';
 import { format } from 'date-fns';
@@ -14,6 +15,15 @@ export default function GameCard({ game, onClick }: GameCardProps) {
   const gameDate = new Date(`${game.date}T${game.time}`);
   const winProb = game.currentWinProb || game.baseWinProb;
   const awayProb = 100 - winProb;
+  
+  // Debug logging for win probabilities
+  useEffect(() => {
+    if (winProb === 50 && game.baseWinProb === 50) {
+      console.warn(`[GameCard] ⚠️ Game ${game.awayTeam} @ ${game.homeTeam} has default 50% probability - prediction may not have been applied`);
+    } else {
+      console.log(`[GameCard] Game ${game.awayTeam} @ ${game.homeTeam}: baseWinProb=${game.baseWinProb}, currentWinProb=${game.currentWinProb}, displayed=${winProb}`);
+    }
+  }, [game.id, winProb, game.baseWinProb, game.currentWinProb, game.awayTeam, game.homeTeam]);
 
   const handleClick = () => {
     console.log('[GameCard] Clicked game:', {

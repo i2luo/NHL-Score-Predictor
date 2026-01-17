@@ -458,6 +458,9 @@ export async function GET(request: Request) {
     if (games.length > 0) {
       try {
         const batchPredictScript = getPythonPath('predict_batch.py');
+        console.log(`[API] Looking for batch prediction script at: ${batchPredictScript}`);
+        console.log(`[API] Script exists: ${fs.existsSync(batchPredictScript)}`);
+        
         if (fs.existsSync(batchPredictScript)) {
           console.log(`[API] Running batch predictions for ${games.length} games...`);
           
@@ -468,26 +471,72 @@ export async function GET(request: Request) {
             awayTeam: g.awayTeam
           }));
           
+          console.log(`[API] Sample games for prediction:`, gamesForPrediction.slice(0, 3));
+          
           const pythonCmd = process.platform === 'win32' ? 'python' : 'python3';
           const inputJson = JSON.stringify(gamesForPrediction);
           
           try {
-            const result = execSync(
-              `${pythonCmd} "${batchPredictScript}" 2>/dev/null`,
-              {
-                input: inputJson,
-                encoding: 'utf-8',
-                timeout: 30000, // 30 second timeout for batch (should be enough)
-                cwd: process.cwd(), // Use current working directory (Vercel-compatible)
-                maxBuffer: 1024 * 1024 * 10 // 10MB buffer
+            console.log(`[API] Executing Python script with ${games.length} games...`);
+            let result: string;
+            let stderrOutput: string = '';
+            
+            try {
+              // Try to capture both stdout and stderr separately for better debugging
+              result = execSync(
+                `${pythonCmd} "${batchPredictScript}" 2>&1`, // Capture stderr for debugging
+                {
+                  input: inputJson,
+                  encoding: 'utf-8',
+                  timeout: 30000, // 30 second timeout for batch (should be enough)
+                  cwd: process.cwd(), // Use current working directory (Vercel-compatible)
+                  maxBuffer: 1024 * 1024 * 10 // 10MB buffer
+                }
+              );
+            } catch (execError: any) {
+              // If execSync throws, it might still have output
+              result = execError.stdout?.toString() || execError.toString() || '';
+              stderrOutput = execError.stderr?.toString() || '';
+              console.error(`[API] Python script execution error:`, execError.message);
+              if (stderrOutput) {
+                console.error(`[API] Python stderr:`, stderrOutput.substring(0, 1000));
               }
-            );
+            }
+            
+            console.log(`[API] Python script output length: ${result.length} characters`);
+            if (result.length > 0) {
+              console.log(`[API] Python script output (first 500 chars):`, result.substring(0, 500));
+            }
+            if (stderrOutput) {
+              console.log(`[API] Python stderr (first 500 chars):`, stderrOutput.substring(0, 500));
+            }
+            
+            // Try to extract JSON from output (may have stderr messages before/after)
+            let jsonOutput = result.trim();
+            
+            // Find JSON object in output (in case there are error messages)
+            const jsonMatch = jsonOutput.match(/\{[\s\S]*\}/);
+            if (jsonMatch) {
+              jsonOutput = jsonMatch[0];
+            } else if (jsonOutput.length === 0) {
+              throw new Error('No output from Python script');
+            }
             
             // Parse batch predictions
-            const predictions = JSON.parse(result.trim());
+            let predictions: Record<string, any>;
+            try {
+              predictions = JSON.parse(jsonOutput);
+            } catch (parseError: any) {
+              console.error(`[API] Failed to parse JSON from Python output:`, parseError.message);
+              console.error(`[API] Output that failed to parse:`, jsonOutput.substring(0, 1000));
+              throw new Error(`Failed to parse predictions: ${parseError.message}`);
+            }
+            console.log(`[API] Parsed ${Object.keys(predictions).length} predictions`);
+            console.log(`[API] Sample predictions:`, Object.entries(predictions).slice(0, 3));
             
             // Apply predictions to games
             let predictionsApplied = 0;
+            let predictionsFailed = 0;
             games.forEach(game => {
               const prediction = predictions[game.id];
               if (prediction && prediction.success && typeof prediction.win_probability === 'number') {
@@ -495,32 +544,52 @@ export async function GET(request: Request) {
                 game.baseWinProb = baseProb;
                 game.currentWinProb = baseProb;
                 predictionsApplied++;
-                console.log(`[API] Applied prediction to ${game.awayTeam} @ ${game.homeTeam}: ${baseProb}%`);
+                console.log(`[API] ✓ Applied prediction to ${game.awayTeam} @ ${game.homeTeam}: ${baseProb}%`);
               } else {
-                console.log(`[API] No prediction for ${game.awayTeam} @ ${game.homeTeam} (id: ${game.id})`);
+                predictionsFailed++;
+                console.log(`[API] ✗ No valid prediction for ${game.awayTeam} @ ${game.homeTeam} (id: ${game.id})`);
                 if (prediction) {
-                  console.log(`[API] Prediction result:`, prediction);
+                  console.log(`[API]   Prediction result:`, JSON.stringify(prediction));
+                } else {
+                  console.log(`[API]   No prediction found in results for game ID: ${game.id}`);
                 }
               }
             });
             
-            console.log(`[API] Applied predictions to ${predictionsApplied} of ${games.length} games`);
+            console.log(`[API] Prediction summary: ${predictionsApplied} applied, ${predictionsFailed} failed out of ${games.length} games`);
             
             // Log sample games to verify predictions
             if (games.length > 0) {
-              games.slice(0, 3).forEach(game => {
-                console.log(`[API] Game ${game.awayTeam} @ ${game.homeTeam}: baseWinProb=${game.baseWinProb}, currentWinProb=${game.currentWinProb}`);
+              console.log(`[API] Final game probabilities (first 5 games):`);
+              games.slice(0, 5).forEach(game => {
+                console.log(`[API]   ${game.awayTeam} @ ${game.homeTeam}: baseWinProb=${game.baseWinProb}, currentWinProb=${game.currentWinProb}`);
               });
             }
+            
+            // Warn if no predictions were applied
+            if (predictionsApplied === 0) {
+              console.error(`[API] ⚠️ CRITICAL: No predictions were applied! All games will show 50% default probability.`);
+              console.error(`[API] This indicates the batch prediction script may have failed or returned invalid data.`);
+            }
           } catch (error: any) {
-            console.warn(`[API] Batch prediction failed:`, error.message?.substring(0, 100));
+            console.error(`[API] Batch prediction execution failed:`, error.message);
+            console.error(`[API] Error stack:`, error.stack?.substring(0, 500));
             console.warn(`[API] Games will use default 50% win probability`);
           }
         } else {
-          console.warn(`[API] Batch prediction script not found, using default 50% probabilities`);
+          console.warn(`[API] ⚠️ Batch prediction script not found at: ${batchPredictScript}`);
+          console.warn(`[API] Using default 50% probabilities for all games`);
+          console.warn(`[API] Current working directory: ${process.cwd()}`);
+          console.warn(`[API] Python directory check:`, {
+            vercelPath: path.join(process.cwd(), 'python', 'predict_batch.py'),
+            exists: fs.existsSync(path.join(process.cwd(), 'python', 'predict_batch.py')),
+            parentPath: path.join(process.cwd(), '..', 'predict_batch.py'),
+            parentExists: fs.existsSync(path.join(process.cwd(), '..', 'predict_batch.py')),
+          });
         }
       } catch (error: any) {
-        console.warn(`[API] Prediction system error:`, error.message?.substring(0, 100));
+        console.error(`[API] Prediction system error:`, error.message);
+        console.error(`[API] Error stack:`, error.stack?.substring(0, 500));
       }
     }
     
