@@ -319,9 +319,6 @@ export async function GET(request: Request) {
     
     const fileData = fs.readFileSync(dataPathToUse, 'utf-8');
     const allGames = JSON.parse(fileData);
-    
-    const fileData = fs.readFileSync(dataPath, 'utf-8');
-    const allGames = JSON.parse(fileData);
     console.log(`[API] Loaded ${allGames.length} games from file`);
     
     // Try to load injury data if available
