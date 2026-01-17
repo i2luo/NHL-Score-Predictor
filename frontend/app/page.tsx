@@ -16,6 +16,28 @@ export default function Home() {
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Memoize onUpdate to prevent infinite loops - MUST be at top level (not conditional)
+  const handleGameUpdate = useCallback((updatedGame: Game) => {
+    console.log('[Page] onUpdate called with:', {
+      id: updatedGame.id,
+      baseWinProb: updatedGame.baseWinProb,
+      currentWinProb: updatedGame.currentWinProb,
+      homeInjuredPlayers: updatedGame.homeInjuredPlayers?.length || 0,
+      awayInjuredPlayers: updatedGame.awayInjuredPlayers?.length || 0,
+    });
+    setSelectedGame(updatedGame);
+    // Update in upcoming games if it exists there (create new array to trigger re-render)
+    setUpcomingGames(prev => {
+      const index = prev.findIndex(g => g.id === updatedGame.id);
+      if (index !== -1) {
+        const updated = [...prev];
+        updated[index] = updatedGame;
+        return updated;
+      }
+      return prev;
+    });
+  }, []); // Empty deps - function doesn't depend on any props/state
+
   // Fetch real data from API, fallback to mock if API fails
   useEffect(() => {
     setIsClient(true);
@@ -119,28 +141,6 @@ export default function Home() {
       awayInjuredPlayers: selectedGame.awayInjuredPlayers?.length || 0,
       awayPlayers: selectedGame.awayInjuredPlayers?.map(p => p.player),
     });
-    
-    // Memoize onUpdate to prevent infinite loops
-    const handleGameUpdate = useCallback((updatedGame: Game) => {
-      console.log('[Page] onUpdate called with:', {
-        id: updatedGame.id,
-        baseWinProb: updatedGame.baseWinProb,
-        currentWinProb: updatedGame.currentWinProb,
-        homeInjuredPlayers: updatedGame.homeInjuredPlayers?.length || 0,
-        awayInjuredPlayers: updatedGame.awayInjuredPlayers?.length || 0,
-      });
-      setSelectedGame(updatedGame);
-      // Update in upcoming games if it exists there (create new array to trigger re-render)
-      setUpcomingGames(prev => {
-        const index = prev.findIndex(g => g.id === updatedGame.id);
-        if (index !== -1) {
-          const updated = [...prev];
-          updated[index] = updatedGame;
-          return updated;
-        }
-        return prev;
-      });
-    }, []); // Empty deps - function doesn't depend on any props/state
     
     return (
       <SimulatorView 
