@@ -19,15 +19,26 @@ const getDataPath = (filename: string): string => {
 };
 
 const getPythonPath = (filename: string): string => {
-  // Try Vercel path first (files copied during build to frontend/python/)
-  const vercelPath = path.join(process.cwd(), 'python', filename);
-  if (fs.existsSync(vercelPath)) {
-    return vercelPath;
+  // Try multiple possible paths (Vercel deployment can have different structures)
+  const possiblePaths = [
+    path.join(process.cwd(), 'python', filename), // Vercel: files copied to frontend/python/
+    path.join(process.cwd(), '..', 'python', filename), // Alternative Vercel structure
+    path.join(process.cwd(), '..', filename), // Local dev: parent directory
+    path.join(__dirname, '..', '..', 'python', filename), // Relative to this file
+    path.join(__dirname, '..', '..', '..', 'python', filename), // Alternative relative
+    path.join(__dirname, '..', '..', filename), // Direct relative
+  ];
+  
+  for (const possiblePath of possiblePaths) {
+    if (fs.existsSync(possiblePath)) {
+      console.log(`[API] Found Python script at: ${possiblePath}`);
+      return possiblePath;
+    }
   }
   
-  // Fallback to parent directory (local development)
-  const localPath = path.join(process.cwd(), '..', filename);
-  return localPath;
+  // Return the first expected path even if it doesn't exist (for error reporting)
+  console.warn(`[API] Python script not found in any expected location. Tried:`, possiblePaths);
+  return possiblePaths[0];
 };
 
 // Mapping of team abbreviations to their starting goalies (2025-26 season)
@@ -253,6 +264,7 @@ function convertToGameFormat(
 // Force dynamic rendering - this API route uses request.url and needs to run on each request
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
+export const maxDuration = 60; // Increase timeout to 60 seconds for batch predictions
 
 export async function GET(request: Request) {
   try {
@@ -454,15 +466,34 @@ export async function GET(request: Request) {
       return dateA.getTime() - dateB.getTime();
     });
     
+    console.log(`[API] ========== AFTER FILTERING AND SORTING ==========`);
+    console.log(`[API] Total games after filtering: ${games.length}`);
+    if (games.length > 0) {
+      console.log(`[API] First game: ${games[0].awayTeam} @ ${games[0].homeTeam} on ${games[0].date}`);
+      console.log(`[API] Last game: ${games[games.length - 1].awayTeam} @ ${games[games.length - 1].homeTeam} on ${games[games.length - 1].date}`);
+    } else {
+      console.warn(`[API] ⚠️ No games after filtering! This might be why predictions aren't running.`);
+    }
+    
     // Batch predict all games at once (much faster than individual calls)
+    console.log(`[API] ========== STARTING BATCH PREDICTIONS ==========`);
+    console.log(`[API] About to run predictions for ${games.length} games`);
+    console.log(`[API] Current timestamp: ${new Date().toISOString()}`);
+    
     if (games.length > 0) {
       try {
         const batchPredictScript = getPythonPath('predict_batch.py');
+        console.log(`[API] ========== BATCH PREDICTION SECTION ==========`);
         console.log(`[API] Looking for batch prediction script at: ${batchPredictScript}`);
         console.log(`[API] Script exists: ${fs.existsSync(batchPredictScript)}`);
         
         if (fs.existsSync(batchPredictScript)) {
           console.log(`[API] Running batch predictions for ${games.length} games...`);
+          console.log(`[API] Using Python script: ${batchPredictScript}`);
+          
+          // Check if Python is available
+          const pythonCmd = process.platform === 'win32' ? 'python' : 'python3';
+          console.log(`[API] Using Python command: ${pythonCmd}`);
           
           // Prepare games for batch prediction
           const gamesForPrediction = games.map(g => ({
@@ -473,8 +504,8 @@ export async function GET(request: Request) {
           
           console.log(`[API] Sample games for prediction:`, gamesForPrediction.slice(0, 3));
           
-          const pythonCmd = process.platform === 'win32' ? 'python' : 'python3';
           const inputJson = JSON.stringify(gamesForPrediction);
+          console.log(`[API] Input JSON length: ${inputJson.length} characters`);
           
           try {
             console.log(`[API] Executing Python script with ${games.length} games...`);
@@ -498,8 +529,22 @@ export async function GET(request: Request) {
               result = execError.stdout?.toString() || execError.toString() || '';
               stderrOutput = execError.stderr?.toString() || '';
               console.error(`[API] Python script execution error:`, execError.message);
+              console.error(`[API] Error code:`, execError.code);
+              console.error(`[API] Error signal:`, execError.signal);
               if (stderrOutput) {
-                console.error(`[API] Python stderr:`, stderrOutput.substring(0, 1000));
+                console.error(`[API] Python stderr (full):`, stderrOutput);
+              }
+              if (result) {
+                console.error(`[API] Python stdout (full):`, result);
+              }
+              
+              // Check if Python command exists
+              try {
+                execSync(`${pythonCmd} --version`, { encoding: 'utf-8', timeout: 5000 });
+                console.log(`[API] Python is available`);
+              } catch (pyCheckError: any) {
+                console.error(`[API] ⚠️ Python command '${pythonCmd}' not found or not working!`);
+                console.error(`[API] This is likely why predictions are failing.`);
               }
             }
             
@@ -577,28 +622,62 @@ export async function GET(request: Request) {
             console.warn(`[API] Games will use default 50% win probability`);
           }
         } else {
-          console.warn(`[API] ⚠️ Batch prediction script not found at: ${batchPredictScript}`);
-          console.warn(`[API] Using default 50% probabilities for all games`);
-          console.warn(`[API] Current working directory: ${process.cwd()}`);
-          console.warn(`[API] Python directory check:`, {
-            vercelPath: path.join(process.cwd(), 'python', 'predict_batch.py'),
-            exists: fs.existsSync(path.join(process.cwd(), 'python', 'predict_batch.py')),
-            parentPath: path.join(process.cwd(), '..', 'predict_batch.py'),
-            parentExists: fs.existsSync(path.join(process.cwd(), '..', 'predict_batch.py')),
+          console.error(`[API] ⚠️ CRITICAL: Batch prediction script not found at: ${batchPredictScript}`);
+          console.error(`[API] Using default 50% probabilities for all games`);
+          console.error(`[API] Current working directory: ${process.cwd()}`);
+          console.error(`[API] __dirname: ${__dirname}`);
+          
+          // Check what files actually exist
+          const checkPaths = [
+            path.join(process.cwd(), 'python'),
+            path.join(process.cwd(), '..', 'python'),
+            path.join(__dirname, '..', '..', 'python'),
+            process.cwd(),
+          ];
+          
+          console.error(`[API] Directory structure check:`);
+          checkPaths.forEach(checkPath => {
+            if (fs.existsSync(checkPath)) {
+              const files = fs.readdirSync(checkPath);
+              console.error(`[API]   ${checkPath}: exists, contains ${files.length} items`);
+              if (files.includes('predict_batch.py')) {
+                console.error(`[API]     ✓ Found predict_batch.py here!`);
+              }
+            } else {
+              console.error(`[API]   ${checkPath}: does not exist`);
+            }
           });
+          
+          console.error(`[API] This is likely a deployment issue. Check:`);
+          console.error(`[API]   1. Is copy-files-for-vercel.js running during build?`);
+          console.error(`[API]   2. Are Python files being copied to frontend/python/?`);
+          console.error(`[API]   3. Check Vercel build logs for file copy errors`);
         }
       } catch (error: any) {
+        console.error(`[API] ========== PREDICTION SYSTEM ERROR ==========`);
         console.error(`[API] Prediction system error:`, error.message);
         console.error(`[API] Error stack:`, error.stack?.substring(0, 500));
       }
+    } else {
+      console.log(`[API] ========== NO GAMES TO PREDICT ==========`);
+      console.log(`[API] Skipping predictions because games.length is 0`);
     }
     
+    console.log(`[API] ========== FINAL GAME SUMMARY ==========`);
     console.log(`[API] Returning ${games.length} games to frontend`);
     if (games.length > 0) {
       console.log(`[API] First game: ${games[0].awayTeam} @ ${games[0].homeTeam} on ${games[0].date}`);
-      if (games[0].baseWinProb !== undefined && games[0].baseWinProb !== 50) {
-        console.log(`[API] First game prediction: ${games[0].baseWinProb}%`);
+      console.log(`[API] First game baseWinProb: ${games[0].baseWinProb}, currentWinProb: ${games[0].currentWinProb}`);
+      
+      // Check how many games have predictions
+      const gamesWithPredictions = games.filter(g => g.baseWinProb !== 50 && g.baseWinProb !== undefined);
+      console.log(`[API] Games with ML predictions (not 50%): ${gamesWithPredictions.length} of ${games.length}`);
+      
+      if (gamesWithPredictions.length === 0 && games.length > 0) {
+        console.error(`[API] ⚠️ CRITICAL: No games have ML predictions! All showing default 50%.`);
+        console.error(`[API] This means batch predictions did not run or failed.`);
       }
+      
       const gamesWithInjuries = games.filter(g => 
         (g.homeInjuredPlayers && g.homeInjuredPlayers.length > 0) || 
         (g.awayInjuredPlayers && g.awayInjuredPlayers.length > 0)
