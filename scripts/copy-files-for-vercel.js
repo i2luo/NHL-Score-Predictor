@@ -6,8 +6,12 @@
 const fs = require('fs');
 const path = require('path');
 
-const rootDir = path.join(__dirname, '..');
-const frontendDir = path.join(rootDir, 'frontend');
+// Determine root directory - script can be run from root or frontend
+// If __dirname is scripts/, root is parent. If __dirname is frontend/, root is parent.
+const scriptDir = __dirname;
+const isInScriptsDir = scriptDir.endsWith('scripts');
+const rootDir = isInScriptsDir ? path.join(scriptDir, '..') : path.join(scriptDir, '..');
+const frontendDir = isInScriptsDir ? path.join(rootDir, 'frontend') : scriptDir;
 
 // Create necessary directories
 const dataDir = path.join(frontendDir, 'data');
