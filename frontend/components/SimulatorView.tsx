@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { Game, GoalieType, RestStatus } from '@/types/game';
 import { calculateWinProb, getTeamName } from '@/lib/calculations';
 import { ArrowLeft, TrendingUp, TrendingDown } from 'lucide-react';
@@ -15,46 +15,84 @@ interface SimulatorViewProps {
 export default function SimulatorView({ game: initialGame, onBack, onUpdate }: SimulatorViewProps) {
   const [game, setGame] = useState<Game>(initialGame);
   const [winProb, setWinProb] = useState(game.baseWinProb);
+  
+  // Use refs to track previous values and prevent infinite loops
+  const prevWinProbRef = useRef<number>(game.baseWinProb);
+  const onUpdateRef = useRef(onUpdate);
+  const isUpdatingRef = useRef(false);
+  
+  // Keep onUpdate ref current without causing re-renders
+  useEffect(() => {
+    onUpdateRef.current = onUpdate;
+  }, [onUpdate]);
 
   // Sync state when initialGame prop changes (important for preserving injury data)
   useEffect(() => {
-    console.log('[SimulatorView] initialGame prop changed, syncing state:', {
-      id: initialGame.id,
-      teams: `${initialGame.awayTeam} @ ${initialGame.homeTeam}`,
-      homeInjuries: initialGame.homeInjuries,
-      homeInjuredPlayers: initialGame.homeInjuredPlayers?.length || 0,
-      homePlayers: initialGame.homeInjuredPlayers?.map(p => p.player),
-      awayInjuries: initialGame.awayInjuries,
-      awayInjuredPlayers: initialGame.awayInjuredPlayers?.length || 0,
-      awayPlayers: initialGame.awayInjuredPlayers?.map(p => p.player),
-    });
-    // Update state to match prop, preserving all injury data
-    setGame(initialGame);
-  }, [initialGame]);
+    // Only update if the game ID actually changed to prevent unnecessary updates
+    if (initialGame.id !== game.id) {
+      console.log('[SimulatorView] initialGame prop changed, syncing state:', {
+        id: initialGame.id,
+        teams: `${initialGame.awayTeam} @ ${initialGame.homeTeam}`,
+        homeInjuries: initialGame.homeInjuries,
+        homeInjuredPlayers: initialGame.homeInjuredPlayers?.length || 0,
+        awayInjuries: initialGame.awayInjuries,
+        awayInjuredPlayers: initialGame.awayInjuredPlayers?.length || 0,
+      });
+      setGame(initialGame);
+      setWinProb(initialGame.baseWinProb);
+      prevWinProbRef.current = initialGame.baseWinProb;
+    }
+  }, [initialGame.id]); // Only depend on ID, not the whole object
 
+  // Calculate win probability when relevant game properties change
+  // Only recalculate when properties that affect the calculation actually change
   useEffect(() => {
+    if (isUpdatingRef.current) {
+      // Skip if we're in the middle of an update to prevent loops
+      return;
+    }
+    
     const newProb = calculateWinProb(game);
-    setWinProb(newProb);
     
-    // Preserve all game data including injury arrays
-    const updatedGame = {
-      ...game,
-      currentWinProb: newProb,
-      // Explicitly preserve injury arrays to prevent loss
-      homeInjuredPlayers: game.homeInjuredPlayers,
-      awayInjuredPlayers: game.awayInjuredPlayers,
-    };
-    
-    console.log('[SimulatorView] onUpdate called with:', {
-      id: updatedGame.id,
-      homeInjuredPlayers: updatedGame.homeInjuredPlayers?.length || 0,
-      homePlayers: updatedGame.homeInjuredPlayers?.map(p => p.player),
-      awayInjuredPlayers: updatedGame.awayInjuredPlayers?.length || 0,
-      awayPlayers: updatedGame.awayInjuredPlayers?.map(p => p.player),
-    });
-    
-    onUpdate(updatedGame);
-  }, [game, onUpdate]);
+    // Only update if probability actually changed
+    if (newProb !== prevWinProbRef.current) {
+      setWinProb(newProb);
+      prevWinProbRef.current = newProb;
+      
+      // Only call onUpdate if the probability changed significantly (more than 0.5%)
+      const currentProb = game.currentWinProb || game.baseWinProb;
+      if (Math.abs(newProb - currentProb) > 0.5) {
+        isUpdatingRef.current = true;
+        
+        // Preserve all game data including injury arrays
+        const updatedGame = {
+          ...game,
+          currentWinProb: newProb,
+          // Explicitly preserve injury arrays to prevent loss
+          homeInjuredPlayers: game.homeInjuredPlayers,
+          awayInjuredPlayers: game.awayInjuredPlayers,
+        };
+        
+        // Use ref to call onUpdate to avoid dependency issues
+        onUpdateRef.current(updatedGame);
+        
+        // Reset flag after a brief delay to allow state to settle
+        setTimeout(() => {
+          isUpdatingRef.current = false;
+        }, 100);
+      }
+    }
+  }, [
+    // Only depend on the specific properties that affect the calculation
+    game.homeGoalie,
+    game.awayGoalie,
+    game.homeInjuries,
+    game.awayInjuries,
+    game.homeRestDays,
+    game.awayRestDays,
+    game.baseWinProb,
+    game.id, // Include ID to detect when game changes
+  ]);
 
   const updateGame = (updates: Partial<Game>) => {
     setGame(prev => {

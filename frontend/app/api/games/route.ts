@@ -425,19 +425,34 @@ export async function GET(request: Request) {
       allGames.forEach((g: any) => teams.add(g.team));
       console.log(`[API] Processing ${teams.size} teams`);
       
+      console.log(`[API] Starting game conversion for ${teams.size} teams...`);
+      let teamCount = 0;
       teams.forEach(t => {
-        const teamGames = convertToGameFormat(allGames, t, injuryCounts, detailedInjuries);
-        teamGames.forEach(game => {
-          const key = `${game.date}-${game.awayTeam}-${game.homeTeam}`;
-          if (!gameMap.has(key)) {
-            gameMap.set(key, game);
-          }
-        });
+        teamCount++;
+        if (teamCount % 5 === 0) {
+          console.log(`[API] Processing team ${teamCount}/${teams.size}: ${t}`);
+        }
+        try {
+          const teamGames = convertToGameFormat(allGames, t, injuryCounts, detailedInjuries);
+          teamGames.forEach(game => {
+            const key = `${game.date}-${game.awayTeam}-${game.homeTeam}`;
+            if (!gameMap.has(key)) {
+              gameMap.set(key, game);
+            }
+          });
+        } catch (error: any) {
+          console.error(`[API] Error converting games for team ${t}:`, error.message);
+        }
       });
       
       games = Array.from(gameMap.values());
+      console.log(`[API] ========== GAME CONVERSION COMPLETE ==========`);
       console.log(`[API] Converted ${games.length} unique games from ${teams.size} teams`);
     }
+    
+    console.log(`[API] ========== BEFORE FILTERING ==========`);
+    console.log(`[API] Total games before filtering: ${games.length}`);
+    console.log(`[API] Current time: ${now.toISOString()}`);
     
     // Filter to upcoming games if requested
     if (upcoming) {
@@ -475,12 +490,18 @@ export async function GET(request: Request) {
       console.warn(`[API] ⚠️ No games after filtering! This might be why predictions aren't running.`);
     }
     
+    // CRITICAL: Log that we're about to start predictions
+    console.log(`[API] ========== CRITICAL: ABOUT TO START PREDICTIONS ==========`);
+    console.log(`[API] Games array length: ${games.length}`);
+    console.log(`[API] Games array is array: ${Array.isArray(games)}`);
+    console.log(`[API] Current timestamp: ${new Date().toISOString()}`);
+    
     // Batch predict all games at once (much faster than individual calls)
     console.log(`[API] ========== STARTING BATCH PREDICTIONS ==========`);
     console.log(`[API] About to run predictions for ${games.length} games`);
-    console.log(`[API] Current timestamp: ${new Date().toISOString()}`);
     
     if (games.length > 0) {
+      console.log(`[API] Entering prediction block - games.length > 0 is true`);
       try {
         const batchPredictScript = getPythonPath('predict_batch.py');
         console.log(`[API] ========== BATCH PREDICTION SECTION ==========`);
@@ -661,8 +682,11 @@ export async function GET(request: Request) {
     } else {
       console.log(`[API] ========== NO GAMES TO PREDICT ==========`);
       console.log(`[API] Skipping predictions because games.length is 0`);
+      console.log(`[API] This is why predictions aren't running!`);
     }
     
+    console.log(`[API] ========== AFTER PREDICTION SECTION ==========`);
+    console.log(`[API] Prediction section completed, moving to final summary`);
     console.log(`[API] ========== FINAL GAME SUMMARY ==========`);
     console.log(`[API] Returning ${games.length} games to frontend`);
     if (games.length > 0) {
@@ -713,6 +737,14 @@ export async function GET(request: Request) {
       response.injuryData = detailedInjuries;
       console.log('[API] No games found, but returning injury data for frontend to use');
     }
+    
+    console.log(`[API] ========== ABOUT TO RETURN RESPONSE ==========`);
+    console.log(`[API] Response will contain ${games.length} games`);
+    console.log(`[API] Sample game probabilities:`, games.slice(0, 3).map(g => ({
+      teams: `${g.awayTeam} @ ${g.homeTeam}`,
+      baseWinProb: g.baseWinProb,
+      currentWinProb: g.currentWinProb
+    })));
     
     return NextResponse.json(response);
   } catch (error: any) {

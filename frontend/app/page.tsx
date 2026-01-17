@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Game } from '@/types/game';
 import { fetchUpcomingGames } from '@/lib/api';
 import { generateUpcomingGames } from '@/lib/mockData';
@@ -120,27 +120,33 @@ export default function Home() {
       awayPlayers: selectedGame.awayInjuredPlayers?.map(p => p.player),
     });
     
+    // Memoize onUpdate to prevent infinite loops
+    const handleGameUpdate = useCallback((updatedGame: Game) => {
+      console.log('[Page] onUpdate called with:', {
+        id: updatedGame.id,
+        baseWinProb: updatedGame.baseWinProb,
+        currentWinProb: updatedGame.currentWinProb,
+        homeInjuredPlayers: updatedGame.homeInjuredPlayers?.length || 0,
+        awayInjuredPlayers: updatedGame.awayInjuredPlayers?.length || 0,
+      });
+      setSelectedGame(updatedGame);
+      // Update in upcoming games if it exists there (create new array to trigger re-render)
+      setUpcomingGames(prev => {
+        const index = prev.findIndex(g => g.id === updatedGame.id);
+        if (index !== -1) {
+          const updated = [...prev];
+          updated[index] = updatedGame;
+          return updated;
+        }
+        return prev;
+      });
+    }, []); // Empty deps - function doesn't depend on any props/state
+    
     return (
       <SimulatorView 
         game={selectedGame} 
         onBack={() => setSelectedGame(null)}
-        onUpdate={(updatedGame) => {
-          console.log('[Page] onUpdate called with:', {
-            id: updatedGame.id,
-            baseWinProb: updatedGame.baseWinProb,
-            currentWinProb: updatedGame.currentWinProb,
-            homeInjuredPlayers: updatedGame.homeInjuredPlayers?.length || 0,
-            awayInjuredPlayers: updatedGame.awayInjuredPlayers?.length || 0,
-          });
-          setSelectedGame(updatedGame);
-          // Update in upcoming games if it exists there (create new array to trigger re-render)
-          const index = upcomingGames.findIndex(g => g.id === updatedGame.id);
-          if (index !== -1) {
-            const updatedGames = [...upcomingGames];
-            updatedGames[index] = updatedGame;
-            setUpcomingGames(updatedGames);
-          }
-        }}
+        onUpdate={handleGameUpdate}
       />
     );
   }
