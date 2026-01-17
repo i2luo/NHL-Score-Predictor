@@ -1,0 +1,22 @@
+beautifulsoup4==4.12.3
+requests==2.31.0
+pandas==2.2.0
+python-dotenv==1.0.0
+xgboost==2.0.3
+scikit-learn==1.3.2
+joblib==1.3.2
+matplotlib==3.8.2
+seaborn==0.13.0
+numpy==1.26.3
+
+# Optional: lxml is faster but not required (html.parser is built-in)
+# lxml==5.1.0
+
+# For injury scraper (bypasses Cloudflare)
+# Option 1: Playwright (recommended - more reliable)
+playwright==1.40.0
+# After installing, run: playwright install chromium
+
+# Option 2: Selenium (alternative)
+# selenium==4.15.2
+# undetected-chromedriver==3.5.4
