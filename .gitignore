@@ -24,6 +24,9 @@ wheels/
 *.egg
 
 # Data files
+# Allow game data and injury data JSON files (needed for deployment)
+!nhl_games_*.json
+!nhl_injuries*.json
 *.json
 *.csv
 *.db
