@@ -250,6 +250,10 @@ function convertToGameFormat(
   return games;
 }
 
+// Force dynamic rendering - this API route uses request.url and needs to run on each request
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -261,15 +265,60 @@ export async function GET(request: Request) {
     const dataPath = getDataPath('nhl_games_2021_2026.json');
     
     console.log('[API] Request received:', { team, upcoming, debug });
+    console.log('[API] Current working directory:', process.cwd());
     console.log('[API] Looking for game data at:', dataPath);
     console.log('[API] File exists:', fs.existsSync(dataPath));
     
+    // Try alternative paths if main path doesn't exist
+    let dataPathToUse = dataPath;
     if (!fs.existsSync(dataPath)) {
-      return NextResponse.json(
-        { error: 'Game data file not found. Please run the scraper first.', path: dataPath },
-        { status: 404 }
-      );
+      const altPaths = [
+        path.join(process.cwd(), 'data', 'nhl_games_2021_2026.json'),
+        path.join(process.cwd(), 'nhl_games_2021_2026.json'),
+        path.join(process.cwd(), '..', 'nhl_games_2021_2026.json'),
+        path.join(process.cwd(), '..', 'data', 'nhl_games_2021_2026.json'),
+      ];
+      
+      console.log('[API] Trying alternative paths...');
+      let foundPath = null;
+      for (const altPath of altPaths) {
+        console.log(`[API] Checking: ${altPath} - exists: ${fs.existsSync(altPath)}`);
+        if (fs.existsSync(altPath)) {
+          foundPath = altPath;
+          break;
+        }
+      }
+      
+      if (!foundPath) {
+        // List what files actually exist
+        try {
+          const cwdFiles = fs.readdirSync(process.cwd());
+          console.log('[API] Files in cwd:', cwdFiles.slice(0, 20));
+          if (fs.existsSync(path.join(process.cwd(), 'data'))) {
+            const dataFiles = fs.readdirSync(path.join(process.cwd(), 'data'));
+            console.log('[API] Files in data/:', dataFiles);
+          }
+        } catch (e) {
+          console.log('[API] Could not list files:', e);
+        }
+        
+        return NextResponse.json(
+          { 
+            error: 'Game data file not found. Please ensure data files are committed to git and copied during build.', 
+            path: dataPath,
+            cwd: process.cwd(),
+            triedPaths: altPaths
+          },
+          { status: 404 }
+        );
+      }
+      
+      dataPathToUse = foundPath;
+      console.log('[API] Using alternative path:', dataPathToUse);
     }
+    
+    const fileData = fs.readFileSync(dataPathToUse, 'utf-8');
+    const allGames = JSON.parse(fileData);
     
     const fileData = fs.readFileSync(dataPath, 'utf-8');
     const allGames = JSON.parse(fileData);
