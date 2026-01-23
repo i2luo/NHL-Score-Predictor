@@ -4,7 +4,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { Game } from '@/types/game';
 import { fetchAllFutureGames } from '@/lib/api';
 import { generateSeasonGames } from '@/lib/mockData';
-import { getTeamName } from '@/lib/calculations';
+import { getTeamName, calculateWinProb } from '@/lib/calculations';
 import { Search, Calendar, Filter } from 'lucide-react';
 import { format } from 'date-fns';
 
@@ -190,7 +190,8 @@ export default function GameFinder({ onGameSelect }: GameFinderProps) {
             <div className="space-y-2 max-h-[600px] overflow-y-auto">
               {filteredGames.map((game) => {
                 const gameDate = new Date(`${game.date}T${game.time}`);
-                const winProb = game.currentWinProb || game.baseWinProb;
+                // Calculate adjusted win probability that accounts for injuries, goalies, rest days
+                const winProb = calculateWinProb(game);
                 
                 return (
                   <button

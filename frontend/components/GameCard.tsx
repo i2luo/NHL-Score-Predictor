@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { Game } from '@/types/game';
-import { getTeamName } from '@/lib/calculations';
+import { getTeamName, calculateWinProb } from '@/lib/calculations';
 import { format } from 'date-fns';
 import { ArrowRight } from 'lucide-react';
 
@@ -13,7 +13,8 @@ interface GameCardProps {
 
 export default function GameCard({ game, onClick }: GameCardProps) {
   const gameDate = new Date(`${game.date}T${game.time}`);
-  const winProb = game.currentWinProb || game.baseWinProb;
+  // Calculate adjusted win probability that accounts for injuries, goalies, rest days
+  const winProb = calculateWinProb(game);
   const awayProb = 100 - winProb;
   
   // Debug logging for win probabilities

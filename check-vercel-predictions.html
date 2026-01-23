@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Vercel Predictions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 30px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        button:hover {
+            background: #5568d3;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .status {
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        .status.working {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.not-working {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.loading {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        .games-list {
+            margin-top: 20px;
+        }
+        .game-item {
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .game-teams {
+            font-weight: 500;
+            color: #333;
+        }
+        .game-prob {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .game-prob.has-prediction {
+            color: #28a745;
+        }
+        .game-prob.default {
+            color: #dc3545;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        .badge.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .badge.danger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .troubleshooting {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3cd;
+            border-radius: 6px;
+            border-left: 4px solid #ffc107;
+        }
+        .troubleshooting h3 {
+            margin-bottom: 10px;
+            color: #856404;
+        }
+        .troubleshooting ul {
+            margin-left: 20px;
+            color: #856404;
+        }
+        .troubleshooting li {
+            margin-bottom: 5px;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Vercel Predictions Checker</h1>
+        <p class="subtitle">Verify if XGBoost model predictions are working on your deployed site</p>
+        
+        <div class="input-group">
+            <label for="apiUrl">Your Vercel App URL:</label>
+            <input 
+                type="text" 
+                id="apiUrl" 
+                placeholder="https://your-app.vercel.app"
+                value=""
+            />
+        </div>
+        
+        <button id="checkBtn" onclick="checkPredictions()">Check Predictions</button>
+        
+        <div id="status"></div>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        async function checkPredictions() {
+            const apiUrl = document.getElementById('apiUrl').value.trim();
+            const checkBtn = document.getElementById('checkBtn');
+            const statusDiv = document.getElementById('status');
+            const resultsDiv = document.getElementById('results');
+            
+            if (!apiUrl) {
+                alert('Please enter your Vercel app URL');
+                return;
+            }
+            
+            // Clean up URL - use the games API directly
+            const cleanUrl = apiUrl.replace(/\/$/, '');
+            const checkUrl = `${cleanUrl}/api/games?upcoming=true`;
+            
+            checkBtn.disabled = true;
+            checkBtn.textContent = 'Checking...';
+            statusDiv.innerHTML = '<div class="status loading">⏳ Checking predictions...</div>';
+            resultsDiv.innerHTML = '';
+            
+            try {
+                const response = await fetch(checkUrl);
+                const data = await response.json();
+                
+                checkBtn.disabled = false;
+                checkBtn.textContent = 'Check Predictions';
+                
+                if (data.error) {
+                    statusDiv.innerHTML = `<div class="error">❌ Error: ${data.message || data.error}</div>`;
+                    return;
+                }
+                
+                const games = data.games || [];
+                
+                if (games.length === 0) {
+                    statusDiv.innerHTML = '<div class="status not-working">⚠️ No games returned</div>';
+                    return;
+                }
+                
+                // Analyze predictions
+                const gamesWithPredictions = games.filter(g => 
+                    g.baseWinProb !== 50 && g.baseWinProb !== undefined && g.baseWinProb !== null
+                );
+                
+                const gamesWithDefault = games.filter(g => 
+                    g.baseWinProb === 50 || g.baseWinProb === undefined || g.baseWinProb === null
+                );
+                
+                const isWorking = gamesWithPredictions.length > 0;
+                const statusClass = isWorking ? 'working' : 'not-working';
+                const statusIcon = isWorking ? '✅' : '❌';
+                const message = isWorking
+                    ? `✅ XGBoost predictions are working! ${gamesWithPredictions.length} of ${games.length} games have ML predictions.`
+                    : `❌ XGBoost predictions are NOT working. All ${games.length} games show default 50% probability.`;
+                
+                statusDiv.innerHTML = `
+                    <div class="status ${statusClass}">
+                        ${statusIcon} ${message}
+                    </div>
+                `;
+                
+                // Summary
+                const summary = {
+                    totalGames: games.length,
+                    gamesWithMLPredictions: gamesWithPredictions.length,
+                    gamesWithDefault50: gamesWithDefault.length,
+                    predictionRate: games.length > 0 
+                        ? ((gamesWithPredictions.length / games.length) * 100).toFixed(1) + '%'
+                        : '0%'
+                };
+                resultsDiv.innerHTML = `
+                    <div class="summary">
+                        <div class="stat-card">
+                            <div class="stat-label">Total Games</div>
+                            <div class="stat-value">${summary.totalGames}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">With ML Predictions</div>
+                            <div class="stat-value">${summary.gamesWithMLPredictions}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Default 50%</div>
+                            <div class="stat-value">${summary.gamesWithDefault50}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Prediction Rate</div>
+                            <div class="stat-value">${summary.predictionRate}</div>
+                        </div>
+                    </div>
+                `;
+                
+                // Sample games
+                if (games.length > 0) {
+                    const gamesHtml = games.slice(0, 10).map(game => {
+                        const probClass = game.hasMLPrediction ? 'has-prediction' : 'default';
+                        const badge = game.hasMLPrediction 
+                            ? '<span class="badge success">ML Prediction</span>'
+                            : '<span class="badge danger">Default 50%</span>';
+                        return `
+                            <div class="game-item">
+                                <div>
+                                    <div class="game-teams">${game.teams} ${badge}</div>
+                                    <div style="font-size: 12px; color: #666; margin-top: 4px;">${game.date}</div>
+                                </div>
+                                <div class="game-prob ${probClass}">${game.baseWinProb}%</div>
+                            </div>
+                        `;
+                    }).join('');
+                    
+                    resultsDiv.innerHTML += `
+                        <div class="games-list">
+                            <h3 style="margin-bottom: 15px;">Sample Games:</h3>
+                            ${gamesHtml}
+                        </div>
+                    `;
+                }
+                
+                // Troubleshooting
+                if (!isWorking) {
+                    resultsDiv.innerHTML += `
+                        <div class="troubleshooting">
+                            <h3>🔧 Troubleshooting Tips:</h3>
+                            <ul>
+                                <li><strong>Check Vercel Logs:</strong> Look for Python script errors in function logs</li>
+                                <li><strong>Check Python Files:</strong> Verify predict_batch.py exists in frontend/python/</li>
+                                <li><strong>Check Model Files:</strong> Verify model files exist in frontend/models/</li>
+                                <li><strong>Check Python Runtime:</strong> Vercel may need Python runtime configured</li>
+                            </ul>
+                        </div>
+                    `;
+                }
+                
+            } catch (error) {
+                checkBtn.disabled = false;
+                checkBtn.textContent = 'Check Predictions';
+                statusDiv.innerHTML = `<div class="error">❌ Failed to check: ${error.message}</div>`;
+            }
+        }
+        
+        // Allow Enter key to trigger check
+        document.getElementById('apiUrl').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPredictions();
+            }
+        });
+    </script>
+</body>
+</html>

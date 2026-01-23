@@ -496,9 +496,26 @@ export async function GET(request: Request) {
     console.log(`[API] Games array is array: ${Array.isArray(games)}`);
     console.log(`[API] Current timestamp: ${new Date().toISOString()}`);
     
+    // Try to load pre-computed predictions first (for Vercel deployment)
+    const precomputedPredictionsPath = getDataPath('predictions.json');
+    let usePrecomputed = false;
+    let precomputedPredictions: Record<string, any> = {};
+    
+    if (fs.existsSync(precomputedPredictionsPath)) {
+      try {
+        console.log(`[API] Found pre-computed predictions, loading...`);
+        precomputedPredictions = JSON.parse(fs.readFileSync(precomputedPredictionsPath, 'utf-8'));
+        usePrecomputed = true;
+        console.log(`[API] Loaded ${Object.keys(precomputedPredictions).length} pre-computed predictions`);
+      } catch (error: any) {
+        console.warn(`[API] Failed to load pre-computed predictions:`, error.message);
+      }
+    }
+    
     // Batch predict all games at once (much faster than individual calls)
     console.log(`[API] ========== STARTING BATCH PREDICTIONS ==========`);
     console.log(`[API] About to run predictions for ${games.length} games`);
+    console.log(`[API] Using pre-computed predictions: ${usePrecomputed}`);
     
     if (games.length > 0) {
       console.log(`[API] Entering prediction block - games.length > 0 is true`);
@@ -508,7 +525,33 @@ export async function GET(request: Request) {
         console.log(`[API] Looking for batch prediction script at: ${batchPredictScript}`);
         console.log(`[API] Script exists: ${fs.existsSync(batchPredictScript)}`);
         
-        if (fs.existsSync(batchPredictScript)) {
+        if (usePrecomputed) {
+          // Use pre-computed predictions (for Vercel deployment)
+          console.log(`[API] Using pre-computed predictions instead of running Python script`);
+          let predictionsApplied = 0;
+          let predictionsFailed = 0;
+          
+          games.forEach(game => {
+            const prediction = precomputedPredictions[game.id];
+            if (prediction && prediction.success && typeof prediction.win_probability === 'number') {
+              const baseProb = Math.round(prediction.win_probability);
+              game.baseWinProb = baseProb;
+              game.currentWinProb = baseProb;
+              predictionsApplied++;
+            } else {
+              predictionsFailed++;
+            }
+          });
+          
+          console.log(`[API] Pre-computed prediction summary: ${predictionsApplied} applied, ${predictionsFailed} failed out of ${games.length} games`);
+          
+          if (predictionsApplied === 0) {
+            console.warn(`[API] ⚠️ No pre-computed predictions matched game IDs. Falling back to Python script.`);
+            usePrecomputed = false; // Fall through to Python script
+          }
+        }
+        
+        if (!usePrecomputed && fs.existsSync(batchPredictScript)) {
           console.log(`[API] Running batch predictions for ${games.length} games...`);
           console.log(`[API] Using Python script: ${batchPredictScript}`);
           

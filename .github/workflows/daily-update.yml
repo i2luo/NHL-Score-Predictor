@@ -1,0 +1,48 @@
+name: Daily Update
+
+on:
+  schedule:
+    # Run at 12pm Eastern Time (5pm UTC, or 4pm UTC during DST)
+    # Adjust the hour if needed: 17 = 5pm UTC = 12pm EST, 16 = 4pm UTC = 12pm EDT
+    - cron: '0 17 * * *'  # 5pm UTC = 12pm EST
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install Python dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install playwright
+          playwright install chromium
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      
+      - name: Run daily update
+        run: |
+          python3 scripts/daily_update.py
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: 0
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add nhl_games_2021_2026.json nhl_injuries.json nhl_injuries_detailed.json frontend/data/predictions.json
+          git diff --staged --quiet || git commit -m "Daily update: $(date +'%Y-%m-%d %H:%M:%S')"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
