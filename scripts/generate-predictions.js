@@ -110,7 +110,7 @@ try {
   console.log(`✅ Generated ${Object.keys(predictions).length} predictions\n`);
   
   // Count successful predictions
-  const successful = Object.values(predictions).filter((p: any) => p.success).length;
+  const successful = Object.values(predictions).filter(p => p.success).length;
   const failed = Object.keys(predictions).length - successful;
   
   console.log(`   ✅ Successful: ${successful}`);
@@ -120,7 +120,7 @@ try {
   
   // Show sample predictions
   console.log('\n📋 Sample predictions:');
-  Object.entries(predictions).slice(0, 5).forEach(([id, pred]: [string, any]) => {
+  Object.entries(predictions).slice(0, 5).forEach(([id, pred]) => {
     if (pred.success) {
       const game = gamesForPrediction.find(g => g.id === id);
       if (game) {
@@ -141,7 +141,7 @@ try {
   console.log(`\n💾 Saved predictions to: ${outputPath}`);
   console.log(`\n✅ Done! Predictions are ready for deployment.\n`);
   
-} catch (error: any) {
+} catch (error) {
   console.error('❌ Error generating predictions:', error.message);
   if (error.stdout) console.error('stdout:', error.stdout.substring(0, 500));
   if (error.stderr) console.error('stderr', error.stderr.substring(0, 500));

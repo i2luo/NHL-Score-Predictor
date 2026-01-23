@@ -45,6 +45,9 @@ const dataFiles = [
   'nhl_injuries.json',
   'nhl_injuries_detailed.json'
 ];
+
+// Note: predictions.json is generated in frontend/data/ and doesn't need to be copied
+// It should be committed to git and will be included in deployment
 console.log('\nCopying data files...');
 dataFiles.forEach(file => {
   const src = path.join(rootDir, file);

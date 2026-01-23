@@ -1,0 +1,2517 @@
+{
+  "game-2026-01-25-ANA-CGY": {
+    "win_probability": 71.4,
+    "predicted_goals": 3.49,
+    "success": true
+  },
+  "game-2026-01-26-ANA-EDM": {
+    "win_probability": 51.2,
+    "predicted_goals": 2.63,
+    "success": true
+  },
+  "game-2026-01-29-ANA-VAN": {
+    "win_probability": 39.9,
+    "predicted_goals": 3.9,
+    "success": true
+  },
+  "game-2026-02-01-VEG-ANA": {
+    "win_probability": 36.7,
+    "predicted_goals": 2.87,
+    "success": true
+  },
+  "game-2026-02-03-SEA-ANA": {
+    "win_probability": 59.8,
+    "predicted_goals": 3.04,
+    "success": true
+  },
+  "game-2026-02-25-EDM-ANA": {
+    "win_probability": 34,
+    "predicted_goals": 2.84,
+    "success": true
+  },
+  "game-2026-02-27-WPG-ANA": {
+    "win_probability": 53,
+    "predicted_goals": 3.09,
+    "success": true
+  },
+  "game-2026-03-01-CGY-ANA": {
+    "win_probability": 61.2,
+    "predicted_goals": 3.26,
+    "success": true
+  },
+  "game-2026-03-03-COL-ANA": {
+    "win_probability": 65.8,
+    "predicted_goals": 2.96,
+    "success": true
+  },
+  "game-2026-03-04-NYI-ANA": {
+    "win_probability": 65,
+    "predicted_goals": 3,
+    "success": true
+  },
+  "game-2026-03-06-MTL-ANA": {
+    "win_probability": 56.6,
+    "predicted_goals": 2.91,
+    "success": true
+  },
+  "game-2026-03-08-STL-ANA": {
+    "win_probability": 76.6,
+    "predicted_goals": 3.21,
+    "success": true
+  },
+  "game-2026-03-10-ANA-WPG": {
+    "win_probability": 68.7,
+    "predicted_goals": 2.53,
+    "success": true
+  },
+  "game-2026-03-12-ANA-TOR": {
+    "win_probability": 28.2,
+    "predicted_goals": 2.92,
+    "success": true
+  },
+  "game-2026-03-14-ANA-OTT": {
+    "win_probability": 33.8,
+    "predicted_goals": 2.75,
+    "success": true
+  },
+  "game-2026-03-15-ANA-MTL": {
+    "win_probability": 39.7,
+    "predicted_goals": 2.37,
+    "success": true
+  },
+  "game-2026-03-18-PHI-ANA": {
+    "win_probability": 63.6,
+    "predicted_goals": 3.53,
+    "success": true
+  },
+  "game-2026-03-20-ANA-UTA": {
+    "win_probability": 45.3,
+    "predicted_goals": 2.25,
+    "success": true
+  },
+  "game-2026-03-22-BUF-ANA": {
+    "win_probability": 46.6,
+    "predicted_goals": 3.36,
+    "success": true
+  },
+  "game-2026-03-24-ANA-VAN": {
+    "win_probability": 39.9,
+    "predicted_goals": 3.9,
+    "success": true
+  },
+  "game-2026-03-26-ANA-CGY": {
+    "win_probability": 71.4,
+    "predicted_goals": 3.49,
+    "success": true
+  },
+  "game-2026-03-28-ANA-EDM": {
+    "win_probability": 51.2,
+    "predicted_goals": 2.63,
+    "success": true
+  },
+  "game-2026-03-30-TOR-ANA": {
+    "win_probability": 42,
+    "predicted_goals": 3.06,
+    "success": true
+  },
+  "game-2026-04-01-ANA-SJS": {
+    "win_probability": 34,
+    "predicted_goals": 1.66,
+    "success": true
+  },
+  "game-2026-04-03-STL-ANA": {
+    "win_probability": 76.6,
+    "predicted_goals": 3.21,
+    "success": true
+  },
+  "game-2026-04-04-CGY-ANA": {
+    "win_probability": 61.2,
+    "predicted_goals": 3.26,
+    "success": true
+  },
+  "game-2026-04-07-NSH-ANA": {
+    "win_probability": 65.6,
+    "predicted_goals": 3.01,
+    "success": true
+  },
+  "game-2026-04-09-SJS-ANA": {
+    "win_probability": 30.2,
+    "predicted_goals": 3.25,
+    "success": true
+  },
+  "game-2026-04-12-VAN-ANA": {
+    "win_probability": 66.3,
+    "predicted_goals": 3.06,
+    "success": true
+  },
+  "game-2026-04-14-ANA-MIN": {
+    "win_probability": 46,
+    "predicted_goals": 2.05,
+    "success": true
+  },
+  "game-2026-04-16-ANA-NSH": {
+    "win_probability": 36,
+    "predicted_goals": 2.08,
+    "success": true
+  },
+  "game-2026-01-24-MTL-BOS": {
+    "win_probability": 47.5,
+    "predicted_goals": 2.67,
+    "success": true
+  },
+  "game-2026-01-26-BOS-NYR": {
+    "win_probability": 72,
+    "predicted_goals": 3.93,
+    "success": true
+  },
+  "game-2026-01-27-NSH-BOS": {
+    "win_probability": 24,
+    "predicted_goals": 2.75,
+    "success": true
+  },
+  "game-2026-01-29-PHI-BOS": {
+    "win_probability": 66.9,
+    "predicted_goals": 2.82,
+    "success": true
+  },
+  "game-2026-02-01-BOS-TBL": {
+    "win_probability": 86.1,
+    "predicted_goals": 4.99,
+    "success": true
+  },
+  "game-2026-02-04-BOS-FLA": {
+    "win_probability": 67.5,
+    "predicted_goals": 3.07,
+    "success": true
+  },
+  "game-2026-02-26-CBJ-BOS": {
+    "win_probability": 29.1,
+    "predicted_goals": 2.75,
+    "success": true
+  },
+  "game-2026-02-28-BOS-PHI": {
+    "win_probability": 91.9,
+    "predicted_goals": 3.05,
+    "success": true
+  },
+  "game-2026-03-03-PIT-BOS": {
+    "win_probability": 34.8,
+    "predicted_goals": 3.02,
+    "success": true
+  },
+  "game-2026-03-05-BOS-NSH": {
+    "win_probability": 26.9,
+    "predicted_goals": 2.22,
+    "success": true
+  },
+  "game-2026-03-07-WSH-BOS": {
+    "win_probability": 60.4,
+    "predicted_goals": 3.2,
+    "success": true
+  },
+  "game-2026-03-08-BOS-PIT": {
+    "win_probability": 74.8,
+    "predicted_goals": 3.06,
+    "success": true
+  },
+  "game-2026-03-10-LAK-BOS": {
+    "win_probability": 46.2,
+    "predicted_goals": 2.97,
+    "success": true
+  },
+  "game-2026-03-12-SJS-BOS": {
+    "win_probability": 47.8,
+    "predicted_goals": 2.88,
+    "success": true
+  },
+  "game-2026-03-14-BOS-WSH": {
+    "win_probability": 56.5,
+    "predicted_goals": 2.33,
+    "success": true
+  },
+  "game-2026-03-16-BOS-NJD": {
+    "win_probability": 86.6,
+    "predicted_goals": 3.5,
+    "success": true
+  },
+  "game-2026-03-17-BOS-MTL": {
+    "win_probability": 18.9,
+    "predicted_goals": 2.13,
+    "success": true
+  },
+  "game-2026-03-19-WPG-BOS": {
+    "win_probability": 62,
+    "predicted_goals": 3.12,
+    "success": true
+  },
+  "game-2026-03-21-BOS-DET": {
+    "win_probability": 21.1,
+    "predicted_goals": 2.34,
+    "success": true
+  },
+  "game-2026-03-24-TOR-BOS": {
+    "win_probability": 49.1,
+    "predicted_goals": 2.68,
+    "success": true
+  },
+  "game-2026-03-25-BOS-BUF": {
+    "win_probability": 26.1,
+    "predicted_goals": 2.25,
+    "success": true
+  },
+  "game-2026-03-28-MIN-BOS": {
+    "win_probability": 47.1,
+    "predicted_goals": 3.05,
+    "success": true
+  },
+  "game-2026-03-29-BOS-CBJ": {
+    "win_probability": 81.1,
+    "predicted_goals": 2.62,
+    "success": true
+  },
+  "game-2026-03-31-DAL-BOS": {
+    "win_probability": 66.6,
+    "predicted_goals": 3.03,
+    "success": true
+  },
+  "game-2026-04-02-BOS-FLA": {
+    "win_probability": 67.5,
+    "predicted_goals": 3.07,
+    "success": true
+  },
+  "game-2026-04-04-BOS-TBL": {
+    "win_probability": 86.1,
+    "predicted_goals": 4.99,
+    "success": true
+  },
+  "game-2026-04-05-BOS-PHI": {
+    "win_probability": 91.9,
+    "predicted_goals": 3.05,
+    "success": true
+  },
+  "game-2026-04-07-BOS-CAR": {
+    "win_probability": 83.1,
+    "predicted_goals": 4.07,
+    "success": true
+  },
+  "game-2026-04-11-TBL-BOS": {
+    "win_probability": 48.2,
+    "predicted_goals": 2.57,
+    "success": true
+  },
+  "game-2026-04-12-BOS-CBJ": {
+    "win_probability": 81.1,
+    "predicted_goals": 2.62,
+    "success": true
+  },
+  "game-2026-04-14-NJD-BOS": {
+    "win_probability": 40,
+    "predicted_goals": 3.06,
+    "success": true
+  },
+  "game-2026-01-24-BUF-NYI": {
+    "win_probability": 46.7,
+    "predicted_goals": 2.93,
+    "success": true
+  },
+  "game-2026-01-27-BUF-TOR": {
+    "win_probability": 34.4,
+    "predicted_goals": 3.11,
+    "success": true
+  },
+  "game-2026-01-29-LAK-BUF": {
+    "win_probability": 46.1,
+    "predicted_goals": 2.49,
+    "success": true
+  },
+  "game-2026-01-31-MTL-BUF": {
+    "win_probability": 32,
+    "predicted_goals": 2.19,
+    "success": true
+  },
+  "game-2026-02-02-BUF-FLA": {
+    "win_probability": 57.1,
+    "predicted_goals": 2.86,
+    "success": true
+  },
+  "game-2026-02-03-BUF-TBL": {
+    "win_probability": 92.9,
+    "predicted_goals": 4.61,
+    "success": true
+  },
+  "game-2026-02-05-PIT-BUF": {
+    "win_probability": 20,
+    "predicted_goals": 2.16,
+    "success": true
+  },
+  "game-2026-02-25-BUF-NJD": {
+    "win_probability": 88,
+    "predicted_goals": 3.49,
+    "success": true
+  },
+  "game-2026-02-27-BUF-FLA": {
+    "win_probability": 57.1,
+    "predicted_goals": 2.86,
+    "success": true
+  },
+  "game-2026-02-28-BUF-TBL": {
+    "win_probability": 92.9,
+    "predicted_goals": 4.61,
+    "success": true
+  },
+  "game-2026-03-03-VEG-BUF": {
+    "win_probability": 47,
+    "predicted_goals": 2.67,
+    "success": true
+  },
+  "game-2026-03-05-BUF-PIT": {
+    "win_probability": 88.4,
+    "predicted_goals": 2.65,
+    "success": true
+  },
+  "game-2026-03-07-NSH-BUF": {
+    "win_probability": 21.9,
+    "predicted_goals": 2.13,
+    "success": true
+  },
+  "game-2026-03-08-TBL-BUF": {
+    "win_probability": 13.3,
+    "predicted_goals": 2.02,
+    "success": true
+  },
+  "game-2026-03-10-SJS-BUF": {
+    "win_probability": 29.8,
+    "predicted_goals": 2.9,
+    "success": true
+  },
+  "game-2026-03-12-WSH-BUF": {
+    "win_probability": 60.4,
+    "predicted_goals": 2.34,
+    "success": true
+  },
+  "game-2026-03-14-TOR-BUF": {
+    "win_probability": 25.8,
+    "predicted_goals": 2.62,
+    "success": true
+  },
+  "game-2026-03-17-BUF-VEG": {
+    "win_probability": 97.1,
+    "predicted_goals": 4.16,
+    "success": true
+  },
+  "game-2026-03-19-BUF-SJS": {
+    "win_probability": 39.9,
+    "predicted_goals": 3.4,
+    "success": true
+  },
+  "game-2026-03-21-BUF-LAK": {
+    "win_probability": 49.2,
+    "predicted_goals": 2.72,
+    "success": true
+  },
+  "game-2026-03-27-DET-BUF": {
+    "win_probability": 31.9,
+    "predicted_goals": 2.23,
+    "success": true
+  },
+  "game-2026-03-28-SEA-BUF": {
+    "win_probability": 24.8,
+    "predicted_goals": 2.65,
+    "success": true
+  },
+  "game-2026-03-31-NYI-BUF": {
+    "win_probability": 36.7,
+    "predicted_goals": 2.41,
+    "success": true
+  },
+  "game-2026-04-02-BUF-OTT": {
+    "win_probability": 41.7,
+    "predicted_goals": 3.19,
+    "success": true
+  },
+  "game-2026-04-04-BUF-WSH": {
+    "win_probability": 58,
+    "predicted_goals": 2.89,
+    "success": true
+  },
+  "game-2026-04-06-TBL-BUF": {
+    "win_probability": 13.3,
+    "predicted_goals": 2.02,
+    "success": true
+  },
+  "game-2026-04-08-BUF-NYR": {
+    "win_probability": 66.6,
+    "predicted_goals": 4.19,
+    "success": true
+  },
+  "game-2026-04-09-CBJ-BUF": {
+    "win_probability": 28.4,
+    "predicted_goals": 2.08,
+    "success": true
+  },
+  "game-2026-04-13-BUF-CHI": {
+    "win_probability": 82.3,
+    "predicted_goals": 3.58,
+    "success": true
+  },
+  "game-2026-04-15-DAL-BUF": {
+    "win_probability": 52.6,
+    "predicted_goals": 2.4,
+    "success": true
+  },
+  "game-2026-01-29-CGY-MIN": {
+    "win_probability": 31.7,
+    "predicted_goals": 2.51,
+    "success": true
+  },
+  "game-2026-01-31-SJS-CGY": {
+    "win_probability": 46.1,
+    "predicted_goals": 3.1,
+    "success": true
+  },
+  "game-2026-02-02-TOR-CGY": {
+    "win_probability": 43.4,
+    "predicted_goals": 2.9,
+    "success": true
+  },
+  "game-2026-02-04-EDM-CGY": {
+    "win_probability": 20.9,
+    "predicted_goals": 2.75,
+    "success": true
+  },
+  "game-2026-02-26-CGY-SJS": {
+    "win_probability": 30.8,
+    "predicted_goals": 2.59,
+    "success": true
+  },
+  "game-2026-02-28-CGY-LAK": {
+    "win_probability": 70.4,
+    "predicted_goals": 3.04,
+    "success": true
+  },
+  "game-2026-03-03-DAL-CGY": {
+    "win_probability": 73.7,
+    "predicted_goals": 3.23,
+    "success": true
+  },
+  "game-2026-03-05-OTT-CGY": {
+    "win_probability": 64,
+    "predicted_goals": 3.58,
+    "success": true
+  },
+  "game-2026-03-07-CAR-CGY": {
+    "win_probability": 40.3,
+    "predicted_goals": 3.71,
+    "success": true
+  },
+  "game-2026-03-09-CGY-WSH": {
+    "win_probability": 19.1,
+    "predicted_goals": 2.78,
+    "success": true
+  },
+  "game-2026-03-10-CGY-NYR": {
+    "win_probability": 33.7,
+    "predicted_goals": 3.86,
+    "success": true
+  },
+  "game-2026-03-12-CGY-NJD": {
+    "win_probability": 83.3,
+    "predicted_goals": 3.68,
+    "success": true
+  },
+  "game-2026-03-14-CGY-NYI": {
+    "win_probability": 47,
+    "predicted_goals": 2.87,
+    "success": true
+  },
+  "game-2026-03-16-CGY-DET": {
+    "win_probability": 19,
+    "predicted_goals": 2.42,
+    "success": true
+  },
+  "game-2026-03-18-STL-CGY": {
+    "win_probability": 79.1,
+    "predicted_goals": 3.51,
+    "success": true
+  },
+  "game-2026-03-20-FLA-CGY": {
+    "win_probability": 77.3,
+    "predicted_goals": 3.32,
+    "success": true
+  },
+  "game-2026-03-22-TBL-CGY": {
+    "win_probability": 28.4,
+    "predicted_goals": 2.36,
+    "success": true
+  },
+  "game-2026-03-24-LAK-CGY": {
+    "win_probability": 70.7,
+    "predicted_goals": 3.51,
+    "success": true
+  },
+  "game-2026-03-28-VAN-CGY": {
+    "win_probability": 75.5,
+    "predicted_goals": 3.36,
+    "success": true
+  },
+  "game-2026-03-30-CGY-COL": {
+    "win_probability": 71.8,
+    "predicted_goals": 3.74,
+    "success": true
+  },
+  "game-2026-04-02-CGY-VEG": {
+    "win_probability": 95.2,
+    "predicted_goals": 3.92,
+    "success": true
+  },
+  "game-2026-04-07-CGY-DAL": {
+    "win_probability": 91.3,
+    "predicted_goals": 3.52,
+    "success": true
+  },
+  "game-2026-04-09-CGY-COL": {
+    "win_probability": 71.8,
+    "predicted_goals": 3.74,
+    "success": true
+  },
+  "game-2026-04-11-CGY-SEA": {
+    "win_probability": 53.8,
+    "predicted_goals": 3.93,
+    "success": true
+  },
+  "game-2026-04-12-UTA-CGY": {
+    "win_probability": 70.9,
+    "predicted_goals": 2.94,
+    "success": true
+  },
+  "game-2026-04-14-COL-CGY": {
+    "win_probability": 49.7,
+    "predicted_goals": 2.89,
+    "success": true
+  },
+  "game-2026-04-16-LAK-CGY": {
+    "win_probability": 70.7,
+    "predicted_goals": 3.51,
+    "success": true
+  },
+  "game-2026-01-24-CAR-OTT": {
+    "win_probability": 17.9,
+    "predicted_goals": 3.53,
+    "success": true
+  },
+  "game-2026-01-29-UTA-CAR": {
+    "win_probability": 87,
+    "predicted_goals": 4.63,
+    "success": true
+  },
+  "game-2026-01-31-CAR-WSH": {
+    "win_probability": 38.9,
+    "predicted_goals": 3.27,
+    "success": true
+  },
+  "game-2026-02-01-LAK-CAR": {
+    "win_probability": 82.5,
+    "predicted_goals": 4.57,
+    "success": true
+  },
+  "game-2026-02-03-OTT-CAR": {
+    "win_probability": 76.9,
+    "predicted_goals": 4.06,
+    "success": true
+  },
+  "game-2026-02-05-CAR-NYR": {
+    "win_probability": 15.6,
+    "predicted_goals": 3.32,
+    "success": true
+  },
+  "game-2026-02-26-TBL-CAR": {
+    "win_probability": 61.5,
+    "predicted_goals": 3.66,
+    "success": true
+  },
+  "game-2026-02-28-DET-CAR": {
+    "win_probability": 80.7,
+    "predicted_goals": 3.78,
+    "success": true
+  },
+  "game-2026-03-02-CAR-SEA": {
+    "win_probability": 49.7,
+    "predicted_goals": 3.61,
+    "success": true
+  },
+  "game-2026-03-04-CAR-VAN": {
+    "win_probability": 17,
+    "predicted_goals": 3.02,
+    "success": true
+  },
+  "game-2026-03-06-CAR-EDM": {
+    "win_probability": 30.1,
+    "predicted_goals": 3.68,
+    "success": true
+  },
+  "game-2026-03-10-PIT-CAR": {
+    "win_probability": 79.5,
+    "predicted_goals": 4.18,
+    "success": true
+  },
+  "game-2026-03-12-STL-CAR": {
+    "win_probability": 78.2,
+    "predicted_goals": 4.04,
+    "success": true
+  },
+  "game-2026-03-14-CAR-TBL": {
+    "win_probability": 77.3,
+    "predicted_goals": 4.95,
+    "success": true
+  },
+  "game-2026-03-17-CAR-CBJ": {
+    "win_probability": 39.4,
+    "predicted_goals": 3.31,
+    "success": true
+  },
+  "game-2026-03-18-PIT-CAR": {
+    "win_probability": 79.5,
+    "predicted_goals": 4.18,
+    "success": true
+  },
+  "game-2026-03-20-CAR-TOR": {
+    "win_probability": 23,
+    "predicted_goals": 3.06,
+    "success": true
+  },
+  "game-2026-03-22-CAR-PIT": {
+    "win_probability": 64.4,
+    "predicted_goals": 3.76,
+    "success": true
+  },
+  "game-2026-03-24-CAR-MTL": {
+    "win_probability": 10.5,
+    "predicted_goals": 2.57,
+    "success": true
+  },
+  "game-2026-03-28-NJD-CAR": {
+    "win_probability": 72.3,
+    "predicted_goals": 4.03,
+    "success": true
+  },
+  "game-2026-03-29-MTL-CAR": {
+    "win_probability": 75.8,
+    "predicted_goals": 3.92,
+    "success": true
+  },
+  "game-2026-03-31-CAR-CBJ": {
+    "win_probability": 39.4,
+    "predicted_goals": 3.31,
+    "success": true
+  },
+  "game-2026-04-02-CBJ-CAR": {
+    "win_probability": 72.5,
+    "predicted_goals": 3.72,
+    "success": true
+  },
+  "game-2026-04-04-NYI-CAR": {
+    "win_probability": 76.1,
+    "predicted_goals": 3.87,
+    "success": true
+  },
+  "game-2026-04-05-CAR-OTT": {
+    "win_probability": 17.9,
+    "predicted_goals": 3.53,
+    "success": true
+  },
+  "game-2026-04-09-CAR-CHI": {
+    "win_probability": 55.8,
+    "predicted_goals": 4.01,
+    "success": true
+  },
+  "game-2026-04-11-CAR-UTA": {
+    "win_probability": 23,
+    "predicted_goals": 2.29,
+    "success": true
+  },
+  "game-2026-04-13-CAR-PHI": {
+    "win_probability": 35.3,
+    "predicted_goals": 2.91,
+    "success": true
+  },
+  "game-2026-04-14-CAR-NYI": {
+    "win_probability": 26.8,
+    "predicted_goals": 3.47,
+    "success": true
+  },
+  "game-2026-01-25-FLA-CHI": {
+    "win_probability": 94.6,
+    "predicted_goals": 3.99,
+    "success": true
+  },
+  "game-2026-01-27-CHI-MIN": {
+    "win_probability": 22.9,
+    "predicted_goals": 2.44,
+    "success": true
+  },
+  "game-2026-01-29-CHI-PIT": {
+    "win_probability": 80.7,
+    "predicted_goals": 2.99,
+    "success": true
+  },
+  "game-2026-01-30-CBJ-CHI": {
+    "win_probability": 80.5,
+    "predicted_goals": 3.27,
+    "success": true
+  },
+  "game-2026-02-02-SJS-CHI": {
+    "win_probability": 68.6,
+    "predicted_goals": 3.79,
+    "success": true
+  },
+  "game-2026-02-04-CHI-CBJ": {
+    "win_probability": 40.3,
+    "predicted_goals": 3,
+    "success": true
+  },
+  "game-2026-02-26-CHI-NSH": {
+    "win_probability": 15.3,
+    "predicted_goals": 2.16,
+    "success": true
+  },
+  "game-2026-02-28-CHI-COL": {
+    "win_probability": 86.5,
+    "predicted_goals": 4,
+    "success": true
+  },
+  "game-2026-03-01-CHI-UTA": {
+    "win_probability": 23.5,
+    "predicted_goals": 2.2,
+    "success": true
+  },
+  "game-2026-03-03-CHI-WPG": {
+    "win_probability": 48.1,
+    "predicted_goals": 2.54,
+    "success": true
+  },
+  "game-2026-03-06-VAN-CHI": {
+    "win_probability": 95.1,
+    "predicted_goals": 2.91,
+    "success": true
+  },
+  "game-2026-03-08-CHI-DAL": {
+    "win_probability": 62.3,
+    "predicted_goals": 3.08,
+    "success": true
+  },
+  "game-2026-03-09-UTA-CHI": {
+    "win_probability": 86.6,
+    "predicted_goals": 3.97,
+    "success": true
+  },
+  "game-2026-03-12-CHI-UTA": {
+    "win_probability": 23.5,
+    "predicted_goals": 2.2,
+    "success": true
+  },
+  "game-2026-03-14-CHI-VEG": {
+    "win_probability": 87.7,
+    "predicted_goals": 3.86,
+    "success": true
+  },
+  "game-2026-03-17-MIN-CHI": {
+    "win_probability": 93.9,
+    "predicted_goals": 4.27,
+    "success": true
+  },
+  "game-2026-03-19-CHI-MIN": {
+    "win_probability": 22.9,
+    "predicted_goals": 2.44,
+    "success": true
+  },
+  "game-2026-03-20-COL-CHI": {
+    "win_probability": 73.6,
+    "predicted_goals": 3.29,
+    "success": true
+  },
+  "game-2026-03-22-NSH-CHI": {
+    "win_probability": 62.7,
+    "predicted_goals": 3.48,
+    "success": true
+  },
+  "game-2026-03-24-CHI-NYI": {
+    "win_probability": 23.1,
+    "predicted_goals": 3.44,
+    "success": true
+  },
+  "game-2026-03-26-CHI-PHI": {
+    "win_probability": 37.4,
+    "predicted_goals": 2.74,
+    "success": true
+  },
+  "game-2026-03-27-CHI-NYR": {
+    "win_probability": 16.2,
+    "predicted_goals": 3.91,
+    "success": true
+  },
+  "game-2026-03-29-CHI-NJD": {
+    "win_probability": 68.7,
+    "predicted_goals": 3.41,
+    "success": true
+  },
+  "game-2026-03-31-WPG-CHI": {
+    "win_probability": 92.4,
+    "predicted_goals": 3.72,
+    "success": true
+  },
+  "game-2026-04-02-CHI-EDM": {
+    "win_probability": 43.7,
+    "predicted_goals": 3.8,
+    "success": true
+  },
+  "game-2026-04-04-CHI-SEA": {
+    "win_probability": 74.2,
+    "predicted_goals": 3.79,
+    "success": true
+  },
+  "game-2026-04-06-CHI-SJS": {
+    "win_probability": 12.6,
+    "predicted_goals": 2.65,
+    "success": true
+  },
+  "game-2026-04-11-STL-CHI": {
+    "win_probability": 96.5,
+    "predicted_goals": 3.81,
+    "success": true
+  },
+  "game-2026-04-15-SJS-CHI": {
+    "win_probability": 68.6,
+    "predicted_goals": 3.79,
+    "success": true
+  },
+  "game-2026-01-25-COL-TOR": {
+    "win_probability": 21,
+    "predicted_goals": 2.76,
+    "success": true
+  },
+  "game-2026-01-28-COL-OTT": {
+    "win_probability": 56.9,
+    "predicted_goals": 3.01,
+    "success": true
+  },
+  "game-2026-01-29-COL-MTL": {
+    "win_probability": 38.2,
+    "predicted_goals": 1.85,
+    "success": true
+  },
+  "game-2026-01-31-COL-DET": {
+    "win_probability": 8.8,
+    "predicted_goals": 2.42,
+    "success": true
+  },
+  "game-2026-02-02-DET-COL": {
+    "win_probability": 78.4,
+    "predicted_goals": 4.27,
+    "success": true
+  },
+  "game-2026-02-04-SJS-COL": {
+    "win_probability": 87.4,
+    "predicted_goals": 4.41,
+    "success": true
+  },
+  "game-2026-02-25-COL-UTA": {
+    "win_probability": 30.3,
+    "predicted_goals": 1.96,
+    "success": true
+  },
+  "game-2026-02-26-MIN-COL": {
+    "win_probability": 57.4,
+    "predicted_goals": 4.29,
+    "success": true
+  },
+  "game-2026-03-02-COL-LAK": {
+    "win_probability": 38.4,
+    "predicted_goals": 2.41,
+    "success": true
+  },
+  "game-2026-03-06-COL-DAL": {
+    "win_probability": 93.5,
+    "predicted_goals": 3.17,
+    "success": true
+  },
+  "game-2026-03-08-MIN-COL": {
+    "win_probability": 57.4,
+    "predicted_goals": 4.29,
+    "success": true
+  },
+  "game-2026-03-10-EDM-COL": {
+    "win_probability": 38.5,
+    "predicted_goals": 3.62,
+    "success": true
+  },
+  "game-2026-03-12-COL-SEA": {
+    "win_probability": 20.8,
+    "predicted_goals": 2.95,
+    "success": true
+  },
+  "game-2026-03-14-COL-WPG": {
+    "win_probability": 77.1,
+    "predicted_goals": 2.1,
+    "success": true
+  },
+  "game-2026-03-16-PIT-COL": {
+    "win_probability": 47.7,
+    "predicted_goals": 3.97,
+    "success": true
+  },
+  "game-2026-03-18-DAL-COL": {
+    "win_probability": 86.7,
+    "predicted_goals": 3.56,
+    "success": true
+  },
+  "game-2026-03-22-COL-WSH": {
+    "win_probability": 67.5,
+    "predicted_goals": 2.06,
+    "success": true
+  },
+  "game-2026-03-24-COL-PIT": {
+    "win_probability": 73.6,
+    "predicted_goals": 2.52,
+    "success": true
+  },
+  "game-2026-03-26-COL-WPG": {
+    "win_probability": 77.1,
+    "predicted_goals": 2.1,
+    "success": true
+  },
+  "game-2026-03-28-WPG-COL": {
+    "win_probability": 86.2,
+    "predicted_goals": 3.8,
+    "success": true
+  },
+  "game-2026-04-01-VAN-COL": {
+    "win_probability": 80.4,
+    "predicted_goals": 3.2,
+    "success": true
+  },
+  "game-2026-04-04-COL-DAL": {
+    "win_probability": 93.5,
+    "predicted_goals": 3.17,
+    "success": true
+  },
+  "game-2026-04-05-STL-COL": {
+    "win_probability": 85.5,
+    "predicted_goals": 4.37,
+    "success": true
+  },
+  "game-2026-04-07-COL-STL": {
+    "win_probability": 55.2,
+    "predicted_goals": 2.56,
+    "success": true
+  },
+  "game-2026-04-11-VEG-COL": {
+    "win_probability": 92,
+    "predicted_goals": 4.46,
+    "success": true
+  },
+  "game-2026-04-13-COL-EDM": {
+    "win_probability": 71.7,
+    "predicted_goals": 2.93,
+    "success": true
+  },
+  "game-2026-04-16-SEA-COL": {
+    "win_probability": 82.2,
+    "predicted_goals": 3.99,
+    "success": true
+  },
+  "game-2026-01-24-TBL-CBJ": {
+    "win_probability": 57.8,
+    "predicted_goals": 2.04,
+    "success": true
+  },
+  "game-2026-01-26-LAK-CBJ": {
+    "win_probability": 57.3,
+    "predicted_goals": 3.57,
+    "success": true
+  },
+  "game-2026-01-28-PHI-CBJ": {
+    "win_probability": 80.5,
+    "predicted_goals": 3.11,
+    "success": true
+  },
+  "game-2026-01-31-CBJ-STL": {
+    "win_probability": 41.2,
+    "predicted_goals": 2.58,
+    "success": true
+  },
+  "game-2026-02-03-CBJ-NJD": {
+    "win_probability": 73.2,
+    "predicted_goals": 3.32,
+    "success": true
+  },
+  "game-2026-02-28-NYI-CBJ": {
+    "win_probability": 73.1,
+    "predicted_goals": 2.4,
+    "success": true
+  },
+  "game-2026-03-02-CBJ-NYR": {
+    "win_probability": 47.5,
+    "predicted_goals": 3.63,
+    "success": true
+  },
+  "game-2026-03-03-NSH-CBJ": {
+    "win_probability": 40.3,
+    "predicted_goals": 2.61,
+    "success": true
+  },
+  "game-2026-03-05-FLA-CBJ": {
+    "win_probability": 74.3,
+    "predicted_goals": 3.56,
+    "success": true
+  },
+  "game-2026-03-07-UTA-CBJ": {
+    "win_probability": 75.9,
+    "predicted_goals": 3.01,
+    "success": true
+  },
+  "game-2026-03-10-CBJ-TBL": {
+    "win_probability": 62.2,
+    "predicted_goals": 4.85,
+    "success": true
+  },
+  "game-2026-03-12-CBJ-FLA": {
+    "win_probability": 37.2,
+    "predicted_goals": 2.68,
+    "success": true
+  },
+  "game-2026-03-14-CBJ-PHI": {
+    "win_probability": 78.6,
+    "predicted_goals": 2.81,
+    "success": true
+  },
+  "game-2026-03-19-NYR-CBJ": {
+    "win_probability": 66.8,
+    "predicted_goals": 3.36,
+    "success": true
+  },
+  "game-2026-03-21-SEA-CBJ": {
+    "win_probability": 67.1,
+    "predicted_goals": 2.71,
+    "success": true
+  },
+  "game-2026-03-22-CBJ-NYI": {
+    "win_probability": 42.4,
+    "predicted_goals": 2.98,
+    "success": true
+  },
+  "game-2026-03-24-CBJ-PHI": {
+    "win_probability": 78.6,
+    "predicted_goals": 2.81,
+    "success": true
+  },
+  "game-2026-03-26-CBJ-MTL": {
+    "win_probability": 10.9,
+    "predicted_goals": 2.03,
+    "success": true
+  },
+  "game-2026-03-28-SJS-CBJ": {
+    "win_probability": 57.4,
+    "predicted_goals": 3.62,
+    "success": true
+  },
+  "game-2026-04-04-WPG-CBJ": {
+    "win_probability": 69.9,
+    "predicted_goals": 2.97,
+    "success": true
+  },
+  "game-2026-04-07-CBJ-DET": {
+    "win_probability": 4.8,
+    "predicted_goals": 2.49,
+    "success": true
+  },
+  "game-2026-04-11-CBJ-MTL": {
+    "win_probability": 10.9,
+    "predicted_goals": 2.03,
+    "success": true
+  },
+  "game-2026-04-14-WSH-CBJ": {
+    "win_probability": 79.7,
+    "predicted_goals": 3.01,
+    "success": true
+  },
+  "game-2026-01-27-DAL-STL": {
+    "win_probability": 63.2,
+    "predicted_goals": 2.17,
+    "success": true
+  },
+  "game-2026-01-29-DAL-VEG": {
+    "win_probability": 97.2,
+    "predicted_goals": 3.42,
+    "success": true
+  },
+  "game-2026-01-31-DAL-UTA": {
+    "win_probability": 61.2,
+    "predicted_goals": 2.41,
+    "success": true
+  },
+  "game-2026-02-02-WPG-DAL": {
+    "win_probability": 93.5,
+    "predicted_goals": 3.1,
+    "success": true
+  },
+  "game-2026-02-04-STL-DAL": {
+    "win_probability": 93.3,
+    "predicted_goals": 3.32,
+    "success": true
+  },
+  "game-2026-02-25-SEA-DAL": {
+    "win_probability": 59.5,
+    "predicted_goals": 3.06,
+    "success": true
+  },
+  "game-2026-02-28-NSH-DAL": {
+    "win_probability": 87.5,
+    "predicted_goals": 3.33,
+    "success": true
+  },
+  "game-2026-03-02-DAL-VAN": {
+    "win_probability": 29.2,
+    "predicted_goals": 3.78,
+    "success": true
+  },
+  "game-2026-03-10-VEG-DAL": {
+    "win_probability": 64,
+    "predicted_goals": 2.8,
+    "success": true
+  },
+  "game-2026-03-12-EDM-DAL": {
+    "win_probability": 60,
+    "predicted_goals": 3.21,
+    "success": true
+  },
+  "game-2026-03-14-DET-DAL": {
+    "win_probability": 86.5,
+    "predicted_goals": 2.9,
+    "success": true
+  },
+  "game-2026-03-16-UTA-DAL": {
+    "win_probability": 93,
+    "predicted_goals": 3.55,
+    "success": true
+  },
+  "game-2026-03-21-DAL-MIN": {
+    "win_probability": 46,
+    "predicted_goals": 2.38,
+    "success": true
+  },
+  "game-2026-03-22-VEG-DAL": {
+    "win_probability": 64,
+    "predicted_goals": 2.8,
+    "success": true
+  },
+  "game-2026-03-24-NJD-DAL": {
+    "win_probability": 91,
+    "predicted_goals": 3.52,
+    "success": true
+  },
+  "game-2026-03-26-DAL-NYI": {
+    "win_probability": 53.6,
+    "predicted_goals": 3.17,
+    "success": true
+  },
+  "game-2026-03-28-DAL-PIT": {
+    "win_probability": 83.9,
+    "predicted_goals": 2.9,
+    "success": true
+  },
+  "game-2026-03-29-DAL-PHI": {
+    "win_probability": 80.1,
+    "predicted_goals": 2.37,
+    "success": true
+  },
+  "game-2026-04-02-WPG-DAL": {
+    "win_probability": 93.5,
+    "predicted_goals": 3.1,
+    "success": true
+  },
+  "game-2026-04-09-MIN-DAL": {
+    "win_probability": 94.8,
+    "predicted_goals": 3.35,
+    "success": true
+  },
+  "game-2026-04-11-NYR-DAL": {
+    "win_probability": 55.9,
+    "predicted_goals": 2.85,
+    "success": true
+  },
+  "game-2026-04-13-DAL-TOR": {
+    "win_probability": 52.2,
+    "predicted_goals": 3.27,
+    "success": true
+  },
+  "game-2026-01-24-DET-WPG": {
+    "win_probability": 72.2,
+    "predicted_goals": 1.94,
+    "success": true
+  },
+  "game-2026-01-27-LAK-DET": {
+    "win_probability": 28.8,
+    "predicted_goals": 2.59,
+    "success": true
+  },
+  "game-2026-01-29-WSH-DET": {
+    "win_probability": 24.2,
+    "predicted_goals": 2.44,
+    "success": true
+  },
+  "game-2026-02-04-DET-UTA": {
+    "win_probability": 34.1,
+    "predicted_goals": 2.46,
+    "success": true
+  },
+  "game-2026-02-26-DET-OTT": {
+    "win_probability": 55.7,
+    "predicted_goals": 2.98,
+    "success": true
+  },
+  "game-2026-03-02-DET-NSH": {
+    "win_probability": 18.8,
+    "predicted_goals": 1.95,
+    "success": true
+  },
+  "game-2026-03-04-VEG-DET": {
+    "win_probability": 29.7,
+    "predicted_goals": 2.26,
+    "success": true
+  },
+  "game-2026-03-06-FLA-DET": {
+    "win_probability": 49.9,
+    "predicted_goals": 2.58,
+    "success": true
+  },
+  "game-2026-03-08-DET-NJD": {
+    "win_probability": 93.1,
+    "predicted_goals": 3.54,
+    "success": true
+  },
+  "game-2026-03-10-DET-FLA": {
+    "win_probability": 40.5,
+    "predicted_goals": 2.8,
+    "success": true
+  },
+  "game-2026-03-12-DET-TBL": {
+    "win_probability": 87.9,
+    "predicted_goals": 4.75,
+    "success": true
+  },
+  "game-2026-03-19-MTL-DET": {
+    "win_probability": 24.1,
+    "predicted_goals": 2.22,
+    "success": true
+  },
+  "game-2026-03-24-OTT-DET": {
+    "win_probability": 18.6,
+    "predicted_goals": 2.55,
+    "success": true
+  },
+  "game-2026-03-28-PHI-DET": {
+    "win_probability": 42,
+    "predicted_goals": 2.58,
+    "success": true
+  },
+  "game-2026-03-31-DET-PIT": {
+    "win_probability": 78.5,
+    "predicted_goals": 3.16,
+    "success": true
+  },
+  "game-2026-04-02-DET-PHI": {
+    "win_probability": 80.3,
+    "predicted_goals": 2.84,
+    "success": true
+  },
+  "game-2026-04-04-DET-NYR": {
+    "win_probability": 58.3,
+    "predicted_goals": 3.98,
+    "success": true
+  },
+  "game-2026-04-05-MIN-DET": {
+    "win_probability": 25.4,
+    "predicted_goals": 2.41,
+    "success": true
+  },
+  "game-2026-04-09-PHI-DET": {
+    "win_probability": 42,
+    "predicted_goals": 2.58,
+    "success": true
+  },
+  "game-2026-04-11-NJD-DET": {
+    "win_probability": 12.7,
+    "predicted_goals": 2.69,
+    "success": true
+  },
+  "game-2026-04-13-DET-TBL": {
+    "win_probability": 87.9,
+    "predicted_goals": 4.75,
+    "success": true
+  },
+  "game-2026-04-15-DET-FLA": {
+    "win_probability": 40.5,
+    "predicted_goals": 2.8,
+    "success": true
+  },
+  "game-2026-01-24-WSH-EDM": {
+    "win_probability": 73.7,
+    "predicted_goals": 3.27,
+    "success": true
+  },
+  "game-2026-01-29-SJS-EDM": {
+    "win_probability": 60.3,
+    "predicted_goals": 3.95,
+    "success": true
+  },
+  "game-2026-01-31-MIN-EDM": {
+    "win_probability": 52,
+    "predicted_goals": 3.71,
+    "success": true
+  },
+  "game-2026-02-03-TOR-EDM": {
+    "win_probability": 70.5,
+    "predicted_goals": 3.63,
+    "success": true
+  },
+  "game-2026-02-26-EDM-LAK": {
+    "win_probability": 10.1,
+    "predicted_goals": 2.54,
+    "success": true
+  },
+  "game-2026-02-28-EDM-SJS": {
+    "win_probability": 3.3,
+    "predicted_goals": 2.31,
+    "success": true
+  },
+  "game-2026-03-03-OTT-EDM": {
+    "win_probability": 49.1,
+    "predicted_goals": 3.32,
+    "success": true
+  },
+  "game-2026-03-08-EDM-VEG": {
+    "win_probability": 59.3,
+    "predicted_goals": 3.92,
+    "success": true
+  },
+  "game-2026-03-13-EDM-STL": {
+    "win_probability": 13.4,
+    "predicted_goals": 2.5,
+    "success": true
+  },
+  "game-2026-03-15-NSH-EDM": {
+    "win_probability": 34.9,
+    "predicted_goals": 3.65,
+    "success": true
+  },
+  "game-2026-03-17-SJS-EDM": {
+    "win_probability": 60.3,
+    "predicted_goals": 3.95,
+    "success": true
+  },
+  "game-2026-03-19-FLA-EDM": {
+    "win_probability": 56.9,
+    "predicted_goals": 3.77,
+    "success": true
+  },
+  "game-2026-03-21-TBL-EDM": {
+    "win_probability": 60.7,
+    "predicted_goals": 3.59,
+    "success": true
+  },
+  "game-2026-03-24-EDM-UTA": {
+    "win_probability": 6.5,
+    "predicted_goals": 2.12,
+    "success": true
+  },
+  "game-2026-03-26-EDM-VEG": {
+    "win_probability": 59.3,
+    "predicted_goals": 3.92,
+    "success": true
+  },
+  "game-2026-03-31-SEA-EDM": {
+    "win_probability": 74.4,
+    "predicted_goals": 3.88,
+    "success": true
+  },
+  "game-2026-04-04-VEG-EDM": {
+    "win_probability": 61.2,
+    "predicted_goals": 4.09,
+    "success": true
+  },
+  "game-2026-04-07-EDM-UTA": {
+    "win_probability": 6.5,
+    "predicted_goals": 2.12,
+    "success": true
+  },
+  "game-2026-04-08-EDM-SJS": {
+    "win_probability": 3.3,
+    "predicted_goals": 2.31,
+    "success": true
+  },
+  "game-2026-04-11-EDM-LAK": {
+    "win_probability": 10.1,
+    "predicted_goals": 2.54,
+    "success": true
+  },
+  "game-2026-04-16-VAN-EDM": {
+    "win_probability": 59.1,
+    "predicted_goals": 3.35,
+    "success": true
+  },
+  "game-2026-01-24-FLA-MIN": {
+    "win_probability": 68.2,
+    "predicted_goals": 2.72,
+    "success": true
+  },
+  "game-2026-01-27-UTA-FLA": {
+    "win_probability": 71.9,
+    "predicted_goals": 3.75,
+    "success": true
+  },
+  "game-2026-01-29-FLA-STL": {
+    "win_probability": 59,
+    "predicted_goals": 2.63,
+    "success": true
+  },
+  "game-2026-01-31-WPG-FLA": {
+    "win_probability": 41.7,
+    "predicted_goals": 2.41,
+    "success": true
+  },
+  "game-2026-02-05-FLA-TBL": {
+    "win_probability": 94.1,
+    "predicted_goals": 4.81,
+    "success": true
+  },
+  "game-2026-02-26-TOR-FLA": {
+    "win_probability": 19.7,
+    "predicted_goals": 2.53,
+    "success": true
+  },
+  "game-2026-03-01-FLA-NYI": {
+    "win_probability": 68.7,
+    "predicted_goals": 3.48,
+    "success": true
+  },
+  "game-2026-03-03-FLA-NJD": {
+    "win_probability": 78.2,
+    "predicted_goals": 3.87,
+    "success": true
+  },
+  "game-2026-03-15-FLA-SEA": {
+    "win_probability": 77.9,
+    "predicted_goals": 4.1,
+    "success": true
+  },
+  "game-2026-03-17-FLA-VAN": {
+    "win_probability": 37.9,
+    "predicted_goals": 3.52,
+    "success": true
+  },
+  "game-2026-03-24-SEA-FLA": {
+    "win_probability": 29.4,
+    "predicted_goals": 2.72,
+    "success": true
+  },
+  "game-2026-03-26-MIN-FLA": {
+    "win_probability": 65,
+    "predicted_goals": 3.09,
+    "success": true
+  },
+  "game-2026-03-28-FLA-NYI": {
+    "win_probability": 68.7,
+    "predicted_goals": 3.48,
+    "success": true
+  },
+  "game-2026-03-29-FLA-NYR": {
+    "win_probability": 77.2,
+    "predicted_goals": 3.91,
+    "success": true
+  },
+  "game-2026-03-31-OTT-FLA": {
+    "win_probability": 64.4,
+    "predicted_goals": 3.13,
+    "success": true
+  },
+  "game-2026-04-04-FLA-PIT": {
+    "win_probability": 87.4,
+    "predicted_goals": 3.7,
+    "success": true
+  },
+  "game-2026-04-05-FLA-PIT": {
+    "win_probability": 87.4,
+    "predicted_goals": 3.7,
+    "success": true
+  },
+  "game-2026-04-07-FLA-MTL": {
+    "win_probability": 50.9,
+    "predicted_goals": 2.45,
+    "success": true
+  },
+  "game-2026-04-09-FLA-OTT": {
+    "win_probability": 40.5,
+    "predicted_goals": 3.71,
+    "success": true
+  },
+  "game-2026-04-11-FLA-TOR": {
+    "win_probability": 38.3,
+    "predicted_goals": 3.25,
+    "success": true
+  },
+  "game-2026-04-13-NYR-FLA": {
+    "win_probability": 23.8,
+    "predicted_goals": 2.58,
+    "success": true
+  },
+  "game-2026-01-24-LAK-STL": {
+    "win_probability": 35.4,
+    "predicted_goals": 2.38,
+    "success": true
+  },
+  "game-2026-01-31-LAK-PHI": {
+    "win_probability": 69.5,
+    "predicted_goals": 2.82,
+    "success": true
+  },
+  "game-2026-02-04-SEA-LAK": {
+    "win_probability": 25.7,
+    "predicted_goals": 2.62,
+    "success": true
+  },
+  "game-2026-02-05-LAK-VEG": {
+    "win_probability": 96.1,
+    "predicted_goals": 4.21,
+    "success": true
+  },
+  "game-2026-02-25-VEG-LAK": {
+    "win_probability": 20.4,
+    "predicted_goals": 2.64,
+    "success": true
+  },
+  "game-2026-03-05-NYI-LAK": {
+    "win_probability": 55.7,
+    "predicted_goals": 2.62,
+    "success": true
+  },
+  "game-2026-03-07-MTL-LAK": {
+    "win_probability": 61.2,
+    "predicted_goals": 2.74,
+    "success": true
+  },
+  "game-2026-03-13-LAK-NYI": {
+    "win_probability": 49.1,
+    "predicted_goals": 3.27,
+    "success": true
+  },
+  "game-2026-03-14-LAK-NJD": {
+    "win_probability": 79.8,
+    "predicted_goals": 4.01,
+    "success": true
+  },
+  "game-2026-03-16-LAK-NYR": {
+    "win_probability": 44,
+    "predicted_goals": 3.92,
+    "success": true
+  },
+  "game-2026-03-19-PHI-LAK": {
+    "win_probability": 83,
+    "predicted_goals": 3.16,
+    "success": true
+  },
+  "game-2026-03-22-LAK-UTA": {
+    "win_probability": 56.9,
+    "predicted_goals": 2.39,
+    "success": true
+  },
+  "game-2026-03-26-LAK-VAN": {
+    "win_probability": 31,
+    "predicted_goals": 3.5,
+    "success": true
+  },
+  "game-2026-03-28-UTA-LAK": {
+    "win_probability": 59.2,
+    "predicted_goals": 3.26,
+    "success": true
+  },
+  "game-2026-04-01-STL-LAK": {
+    "win_probability": 87.1,
+    "predicted_goals": 3,
+    "success": true
+  },
+  "game-2026-04-02-NSH-LAK": {
+    "win_probability": 46,
+    "predicted_goals": 2.87,
+    "success": true
+  },
+  "game-2026-04-04-TOR-LAK": {
+    "win_probability": 12.7,
+    "predicted_goals": 2.52,
+    "success": true
+  },
+  "game-2026-04-06-NSH-LAK": {
+    "win_probability": 46,
+    "predicted_goals": 2.87,
+    "success": true
+  },
+  "game-2026-04-09-VAN-LAK": {
+    "win_probability": 89.9,
+    "predicted_goals": 2.61,
+    "success": true
+  },
+  "game-2026-04-13-LAK-SEA": {
+    "win_probability": 69,
+    "predicted_goals": 3.88,
+    "success": true
+  },
+  "game-2026-04-14-LAK-VAN": {
+    "win_probability": 31,
+    "predicted_goals": 3.5,
+    "success": true
+  },
+  "game-2026-02-02-MTL-MIN": {
+    "win_probability": 50.4,
+    "predicted_goals": 2.19,
+    "success": true
+  },
+  "game-2026-02-04-MIN-NSH": {
+    "win_probability": 41.3,
+    "predicted_goals": 2.41,
+    "success": true
+  },
+  "game-2026-02-27-MIN-UTA": {
+    "win_probability": 40.6,
+    "predicted_goals": 2.14,
+    "success": true
+  },
+  "game-2026-03-01-STL-MIN": {
+    "win_probability": 60.4,
+    "predicted_goals": 2.74,
+    "success": true
+  },
+  "game-2026-03-03-TBL-MIN": {
+    "win_probability": 22.7,
+    "predicted_goals": 2.1,
+    "success": true
+  },
+  "game-2026-03-06-MIN-VEG": {
+    "win_probability": 98.1,
+    "predicted_goals": 4.49,
+    "success": true
+  },
+  "game-2026-03-10-UTA-MIN": {
+    "win_probability": 80.1,
+    "predicted_goals": 2.87,
+    "success": true
+  },
+  "game-2026-03-12-PHI-MIN": {
+    "win_probability": 49.2,
+    "predicted_goals": 2.6,
+    "success": true
+  },
+  "game-2026-03-14-NYR-MIN": {
+    "win_probability": 19.3,
+    "predicted_goals": 2.2,
+    "success": true
+  },
+  "game-2026-03-15-TOR-MIN": {
+    "win_probability": 37.3,
+    "predicted_goals": 2.3,
+    "success": true
+  },
+  "game-2026-03-24-MIN-TBL": {
+    "win_probability": 88.1,
+    "predicted_goals": 4.91,
+    "success": true
+  },
+  "game-2026-04-02-VAN-MIN": {
+    "win_probability": 52.1,
+    "predicted_goals": 2.2,
+    "success": true
+  },
+  "game-2026-04-04-MIN-OTT": {
+    "win_probability": 28.7,
+    "predicted_goals": 3.24,
+    "success": true
+  },
+  "game-2026-04-07-SEA-MIN": {
+    "win_probability": 28.7,
+    "predicted_goals": 2.44,
+    "success": true
+  },
+  "game-2026-04-11-MIN-NSH": {
+    "win_probability": 41.3,
+    "predicted_goals": 2.41,
+    "success": true
+  },
+  "game-2026-04-13-MIN-STL": {
+    "win_probability": 46.2,
+    "predicted_goals": 2.6,
+    "success": true
+  },
+  "game-2026-01-27-VEG-MTL": {
+    "win_probability": 32.3,
+    "predicted_goals": 2.07,
+    "success": true
+  },
+  "game-2026-02-04-MTL-WPG": {
+    "win_probability": 90.2,
+    "predicted_goals": 2.08,
+    "success": true
+  },
+  "game-2026-02-26-NYI-MTL": {
+    "win_probability": 20.7,
+    "predicted_goals": 1.88,
+    "success": true
+  },
+  "game-2026-02-28-WSH-MTL": {
+    "win_probability": 43.8,
+    "predicted_goals": 2.39,
+    "success": true
+  },
+  "game-2026-03-03-MTL-SJS": {
+    "win_probability": 35.1,
+    "predicted_goals": 2.67,
+    "success": true
+  },
+  "game-2026-03-10-TOR-MTL": {
+    "win_probability": 16.3,
+    "predicted_goals": 1.79,
+    "success": true
+  },
+  "game-2026-03-11-MTL-OTT": {
+    "win_probability": 29.4,
+    "predicted_goals": 2.9,
+    "success": true
+  },
+  "game-2026-03-14-SJS-MTL": {
+    "win_probability": 23.6,
+    "predicted_goals": 2.56,
+    "success": true
+  },
+  "game-2026-03-21-NYI-MTL": {
+    "win_probability": 20.7,
+    "predicted_goals": 1.88,
+    "success": true
+  },
+  "game-2026-03-28-MTL-NSH": {
+    "win_probability": 36,
+    "predicted_goals": 1.92,
+    "success": true
+  },
+  "game-2026-03-31-MTL-TBL": {
+    "win_probability": 86.6,
+    "predicted_goals": 4.8,
+    "success": true
+  },
+  "game-2026-04-02-MTL-NYR": {
+    "win_probability": 79.4,
+    "predicted_goals": 3.93,
+    "success": true
+  },
+  "game-2026-04-04-MTL-NJD": {
+    "win_probability": 81,
+    "predicted_goals": 3.18,
+    "success": true
+  },
+  "game-2026-04-05-NJD-MTL": {
+    "win_probability": 26.2,
+    "predicted_goals": 2.39,
+    "success": true
+  },
+  "game-2026-04-09-TBL-MTL": {
+    "win_probability": 19.6,
+    "predicted_goals": 1.69,
+    "success": true
+  },
+  "game-2026-04-12-MTL-NYI": {
+    "win_probability": 59.9,
+    "predicted_goals": 3.06,
+    "success": true
+  },
+  "game-2026-04-14-MTL-PHI": {
+    "win_probability": 91.6,
+    "predicted_goals": 2.82,
+    "success": true
+  },
+  "game-2026-01-24-UTA-NSH": {
+    "win_probability": 23.4,
+    "predicted_goals": 2.85,
+    "success": true
+  },
+  "game-2026-01-29-NSH-NJD": {
+    "win_probability": 79.9,
+    "predicted_goals": 3.36,
+    "success": true
+  },
+  "game-2026-01-31-NSH-NYI": {
+    "win_probability": 33.4,
+    "predicted_goals": 3.13,
+    "success": true
+  },
+  "game-2026-02-02-STL-NSH": {
+    "win_probability": 55.6,
+    "predicted_goals": 2.48,
+    "success": true
+  },
+  "game-2026-02-05-NSH-WSH": {
+    "win_probability": 17.5,
+    "predicted_goals": 2.24,
+    "success": true
+  },
+  "game-2026-03-10-NSH-SEA": {
+    "win_probability": 49.3,
+    "predicted_goals": 3.96,
+    "success": true
+  },
+  "game-2026-03-12-NSH-VAN": {
+    "win_probability": 26.7,
+    "predicted_goals": 3.06,
+    "success": true
+  },
+  "game-2026-03-17-NSH-WPG": {
+    "win_probability": 66.3,
+    "predicted_goals": 2.15,
+    "success": true
+  },
+  "game-2026-03-19-SEA-NSH": {
+    "win_probability": 10.8,
+    "predicted_goals": 2.07,
+    "success": true
+  },
+  "game-2026-03-21-VEG-NSH": {
+    "win_probability": 20.4,
+    "predicted_goals": 1.91,
+    "success": true
+  },
+  "game-2026-03-24-SJS-NSH": {
+    "win_probability": 25.2,
+    "predicted_goals": 2.81,
+    "success": true
+  },
+  "game-2026-03-26-NJD-NSH": {
+    "win_probability": 38.4,
+    "predicted_goals": 2.62,
+    "success": true
+  },
+  "game-2026-03-29-NSH-TBL": {
+    "win_probability": 85.3,
+    "predicted_goals": 4.63,
+    "success": true
+  },
+  "game-2026-04-04-NSH-SJS": {
+    "win_probability": 11.9,
+    "predicted_goals": 2.64,
+    "success": true
+  },
+  "game-2026-04-09-NSH-UTA": {
+    "win_probability": 20.7,
+    "predicted_goals": 2.34,
+    "success": true
+  },
+  "game-2026-04-13-SJS-NSH": {
+    "win_probability": 25.2,
+    "predicted_goals": 2.81,
+    "success": true
+  },
+  "game-2026-01-25-NJD-SEA": {
+    "win_probability": 36.5,
+    "predicted_goals": 4.11,
+    "success": true
+  },
+  "game-2026-01-27-WPG-NJD": {
+    "win_probability": 85.2,
+    "predicted_goals": 4.1,
+    "success": true
+  },
+  "game-2026-01-31-NJD-OTT": {
+    "win_probability": 39.9,
+    "predicted_goals": 3.27,
+    "success": true
+  },
+  "game-2026-02-05-NYI-NJD": {
+    "win_probability": 90.5,
+    "predicted_goals": 3.36,
+    "success": true
+  },
+  "game-2026-02-26-NJD-PIT": {
+    "win_probability": 76.4,
+    "predicted_goals": 3.26,
+    "success": true
+  },
+  "game-2026-02-28-NJD-STL": {
+    "win_probability": 34.4,
+    "predicted_goals": 2.75,
+    "success": true
+  },
+  "game-2026-03-04-TOR-NJD": {
+    "win_probability": 77.9,
+    "predicted_goals": 3.36,
+    "success": true
+  },
+  "game-2026-03-07-NYR-NJD": {
+    "win_probability": 80.3,
+    "predicted_goals": 3.31,
+    "success": true
+  },
+  "game-2026-03-18-NJD-NYR": {
+    "win_probability": 39.4,
+    "predicted_goals": 3.54,
+    "success": true
+  },
+  "game-2026-03-20-NJD-WSH": {
+    "win_probability": 28.4,
+    "predicted_goals": 3.27,
+    "success": true
+  },
+  "game-2026-03-31-NJD-NYR": {
+    "win_probability": 39.4,
+    "predicted_goals": 3.54,
+    "success": true
+  },
+  "game-2026-04-02-WSH-NJD": {
+    "win_probability": 79.3,
+    "predicted_goals": 3.56,
+    "success": true
+  },
+  "game-2026-04-07-PHI-NJD": {
+    "win_probability": 89.3,
+    "predicted_goals": 3.94,
+    "success": true
+  },
+  "game-2026-04-09-PIT-NJD": {
+    "win_probability": 74.3,
+    "predicted_goals": 3.52,
+    "success": true
+  },
+  "game-2026-04-12-OTT-NJD": {
+    "win_probability": 76.6,
+    "predicted_goals": 3.76,
+    "success": true
+  },
+  "game-2026-01-26-NYI-PHI": {
+    "win_probability": 77.2,
+    "predicted_goals": 2.44,
+    "success": true
+  },
+  "game-2026-01-28-NYR-NYI": {
+    "win_probability": 21.5,
+    "predicted_goals": 3.32,
+    "success": true
+  },
+  "game-2026-01-29-NYI-NYR": {
+    "win_probability": 67.6,
+    "predicted_goals": 4.09,
+    "success": true
+  },
+  "game-2026-02-02-NYI-WSH": {
+    "win_probability": 55.7,
+    "predicted_goals": 2.39,
+    "success": true
+  },
+  "game-2026-02-03-PIT-NYI": {
+    "win_probability": 30.5,
+    "predicted_goals": 3.2,
+    "success": true
+  },
+  "game-2026-03-07-NYI-SJS": {
+    "win_probability": 40.5,
+    "predicted_goals": 2.82,
+    "success": true
+  },
+  "game-2026-03-10-NYI-STL": {
+    "win_probability": 54.8,
+    "predicted_goals": 2.17,
+    "success": true
+  },
+  "game-2026-03-17-NYI-TOR": {
+    "win_probability": 42.7,
+    "predicted_goals": 3.15,
+    "success": true
+  },
+  "game-2026-03-19-NYI-OTT": {
+    "win_probability": 48.4,
+    "predicted_goals": 3.04,
+    "success": true
+  },
+  "game-2026-03-30-PIT-NYI": {
+    "win_probability": 30.5,
+    "predicted_goals": 3.2,
+    "success": true
+  },
+  "game-2026-04-03-PHI-NYI": {
+    "win_probability": 69.3,
+    "predicted_goals": 3.11,
+    "success": true
+  },
+  "game-2026-04-09-TOR-NYI": {
+    "win_probability": 23.5,
+    "predicted_goals": 2.85,
+    "success": true
+  },
+  "game-2026-04-11-OTT-NYI": {
+    "win_probability": 50,
+    "predicted_goals": 3.17,
+    "success": true
+  },
+  "game-2026-01-31-NYR-PIT": {
+    "win_probability": 72.9,
+    "predicted_goals": 3.07,
+    "success": true
+  },
+  "game-2026-02-26-PHI-NYR": {
+    "win_probability": 73.9,
+    "predicted_goals": 3.83,
+    "success": true
+  },
+  "game-2026-02-28-PIT-NYR": {
+    "win_probability": 42.7,
+    "predicted_goals": 3.79,
+    "success": true
+  },
+  "game-2026-03-05-TOR-NYR": {
+    "win_probability": 28.2,
+    "predicted_goals": 4.06,
+    "success": true
+  },
+  "game-2026-03-09-NYR-PHI": {
+    "win_probability": 29.5,
+    "predicted_goals": 2.12,
+    "success": true
+  },
+  "game-2026-03-12-NYR-WPG": {
+    "win_probability": 53.6,
+    "predicted_goals": 2.19,
+    "success": true
+  },
+  "game-2026-03-22-WPG-NYR": {
+    "win_probability": 74.5,
+    "predicted_goals": 4.02,
+    "success": true
+  },
+  "game-2026-03-23-OTT-NYR": {
+    "win_probability": 69.4,
+    "predicted_goals": 3.29,
+    "success": true
+  },
+  "game-2026-03-25-NYR-TOR": {
+    "win_probability": 42.7,
+    "predicted_goals": 2.98,
+    "success": true
+  },
+  "game-2026-04-05-WSH-NYR": {
+    "win_probability": 80.1,
+    "predicted_goals": 3.76,
+    "success": true
+  },
+  "game-2026-04-15-NYR-TBL": {
+    "win_probability": 87.8,
+    "predicted_goals": 3.66,
+    "success": true
+  },
+  "game-2026-01-25-VEG-OTT": {
+    "win_probability": 23.7,
+    "predicted_goals": 3.09,
+    "success": true
+  },
+  "game-2026-02-02-OTT-PIT": {
+    "win_probability": 69.1,
+    "predicted_goals": 3.51,
+    "success": true
+  },
+  "game-2026-02-05-OTT-PHI": {
+    "win_probability": 88.8,
+    "predicted_goals": 2.92,
+    "success": true
+  },
+  "game-2026-02-28-OTT-TOR": {
+    "win_probability": 44,
+    "predicted_goals": 3.15,
+    "success": true
+  },
+  "game-2026-03-07-OTT-SEA": {
+    "win_probability": 67.2,
+    "predicted_goals": 3.98,
+    "success": true
+  },
+  "game-2026-03-09-OTT-VAN": {
+    "win_probability": 38.3,
+    "predicted_goals": 3.49,
+    "success": true
+  },
+  "game-2026-03-15-SJS-OTT": {
+    "win_probability": 17.9,
+    "predicted_goals": 3.5,
+    "success": true
+  },
+  "game-2026-03-18-OTT-WSH": {
+    "win_probability": 58.3,
+    "predicted_goals": 2.92,
+    "success": true
+  },
+  "game-2026-03-21-TOR-OTT": {
+    "win_probability": 28,
+    "predicted_goals": 3.09,
+    "success": true
+  },
+  "game-2026-03-26-PIT-OTT": {
+    "win_probability": 48.3,
+    "predicted_goals": 3.41,
+    "success": true
+  },
+  "game-2026-03-28-OTT-TBL": {
+    "win_probability": 82.4,
+    "predicted_goals": 4.67,
+    "success": true
+  },
+  "game-2026-04-07-TBL-OTT": {
+    "win_probability": 27.3,
+    "predicted_goals": 2.78,
+    "success": true
+  },
+  "game-2026-04-15-TOR-OTT": {
+    "win_probability": 28,
+    "predicted_goals": 3.09,
+    "success": true
+  },
+  "game-2026-02-03-WSH-PHI": {
+    "win_probability": 93,
+    "predicted_goals": 3.19,
+    "success": true
+  },
+  "game-2026-02-25-PHI-WSH": {
+    "win_probability": 52.1,
+    "predicted_goals": 2.92,
+    "success": true
+  },
+  "game-2026-03-02-PHI-TOR": {
+    "win_probability": 40.6,
+    "predicted_goals": 3.43,
+    "success": true
+  },
+  "game-2026-03-05-UTA-PHI": {
+    "win_probability": 86.6,
+    "predicted_goals": 2.99,
+    "success": true
+  },
+  "game-2026-03-07-PHI-PIT": {
+    "win_probability": 88.1,
+    "predicted_goals": 3.52,
+    "success": true
+  },
+  "game-2026-03-11-WSH-PHI": {
+    "win_probability": 93,
+    "predicted_goals": 3.19,
+    "success": true
+  },
+  "game-2026-03-21-PHI-SJS": {
+    "win_probability": 49.4,
+    "predicted_goals": 2.68,
+    "success": true
+  },
+  "game-2026-03-31-PHI-WSH": {
+    "win_probability": 52.1,
+    "predicted_goals": 2.92,
+    "success": true
+  },
+  "game-2026-04-11-PHI-WPG": {
+    "win_probability": 94.3,
+    "predicted_goals": 2.58,
+    "success": true
+  },
+  "game-2026-01-25-PIT-VAN": {
+    "win_probability": 27.5,
+    "predicted_goals": 3.4,
+    "success": true
+  },
+  "game-2026-03-01-VEG-PIT": {
+    "win_probability": 87.2,
+    "predicted_goals": 3.69,
+    "success": true
+  },
+  "game-2026-03-12-PIT-VEG": {
+    "win_probability": 85.9,
+    "predicted_goals": 4.43,
+    "success": true
+  },
+  "game-2026-03-14-PIT-UTA": {
+    "win_probability": 16.8,
+    "predicted_goals": 2.1,
+    "success": true
+  },
+  "game-2026-03-21-WPG-PIT": {
+    "win_probability": 84.2,
+    "predicted_goals": 3.08,
+    "success": true
+  },
+  "game-2026-04-02-PIT-TBL": {
+    "win_probability": 73.2,
+    "predicted_goals": 5.06,
+    "success": true
+  },
+  "game-2026-04-11-WSH-PIT": {
+    "win_probability": 83.2,
+    "predicted_goals": 3.11,
+    "success": true
+  },
+  "game-2026-04-12-PIT-WSH": {
+    "win_probability": 42.5,
+    "predicted_goals": 2.73,
+    "success": true
+  },
+  "game-2026-04-14-PIT-STL": {
+    "win_probability": 21.5,
+    "predicted_goals": 2.7,
+    "success": true
+  },
+  "game-2026-01-27-SJS-VAN": {
+    "win_probability": 11.1,
+    "predicted_goals": 2.8,
+    "success": true
+  },
+  "game-2026-03-01-WPG-SJS": {
+    "win_probability": 59.4,
+    "predicted_goals": 2.94,
+    "success": true
+  },
+  "game-2026-03-06-STL-SJS": {
+    "win_probability": 59.9,
+    "predicted_goals": 2.8,
+    "success": true
+  },
+  "game-2026-03-26-SJS-STL": {
+    "win_probability": 25.8,
+    "predicted_goals": 2.59,
+    "success": true
+  },
+  "game-2026-03-30-STL-SJS": {
+    "win_probability": 59.9,
+    "predicted_goals": 2.8,
+    "success": true
+  },
+  "game-2026-04-02-TOR-SJS": {
+    "win_probability": 9.1,
+    "predicted_goals": 3.05,
+    "success": true
+  },
+  "game-2026-04-11-VAN-SJS": {
+    "win_probability": 48.7,
+    "predicted_goals": 2.29,
+    "success": true
+  },
+  "game-2026-04-16-SJS-WPG": {
+    "win_probability": 61,
+    "predicted_goals": 2.8,
+    "success": true
+  },
+  "game-2026-01-27-WSH-SEA": {
+    "win_probability": 63.8,
+    "predicted_goals": 3.76,
+    "success": true
+  },
+  "game-2026-01-29-TOR-SEA": {
+    "win_probability": 62.8,
+    "predicted_goals": 3.32,
+    "success": true
+  },
+  "game-2026-01-31-SEA-VEG": {
+    "win_probability": 76.5,
+    "predicted_goals": 4.05,
+    "success": true
+  },
+  "game-2026-02-26-SEA-STL": {
+    "win_probability": 21.1,
+    "predicted_goals": 2.31,
+    "success": true
+  },
+  "game-2026-02-28-VAN-SEA": {
+    "win_probability": 70.9,
+    "predicted_goals": 3.96,
+    "success": true
+  },
+  "game-2026-03-04-STL-SEA": {
+    "win_probability": 71.3,
+    "predicted_goals": 4.19,
+    "success": true
+  },
+  "game-2026-03-14-SEA-VAN": {
+    "win_probability": 10.8,
+    "predicted_goals": 3.04,
+    "success": true
+  },
+  "game-2026-03-17-TBL-SEA": {
+    "win_probability": 32.4,
+    "predicted_goals": 3.03,
+    "success": true
+  },
+  "game-2026-03-26-SEA-TBL": {
+    "win_probability": 91.7,
+    "predicted_goals": 4.95,
+    "success": true
+  },
+  "game-2026-04-02-UTA-SEA": {
+    "win_probability": 61.2,
+    "predicted_goals": 3.87,
+    "success": true
+  },
+  "game-2026-04-06-SEA-WPG": {
+    "win_probability": 47.7,
+    "predicted_goals": 2.26,
+    "success": true
+  },
+  "game-2026-04-09-VEG-SEA": {
+    "win_probability": 79.2,
+    "predicted_goals": 4.2,
+    "success": true
+  },
+  "game-2026-04-15-SEA-VEG": {
+    "win_probability": 76.5,
+    "predicted_goals": 4.05,
+    "success": true
+  },
+  "game-2026-03-15-STL-WPG": {
+    "win_probability": 88.6,
+    "predicted_goals": 2.54,
+    "success": true
+  },
+  "game-2026-03-21-STL-VAN": {
+    "win_probability": 51.1,
+    "predicted_goals": 3.54,
+    "success": true
+  },
+  "game-2026-03-24-WSH-STL": {
+    "win_probability": 48.2,
+    "predicted_goals": 3.1,
+    "success": true
+  },
+  "game-2026-03-28-TOR-STL": {
+    "win_probability": 23.7,
+    "predicted_goals": 2.36,
+    "success": true
+  },
+  "game-2026-04-09-WPG-STL": {
+    "win_probability": 58.3,
+    "predicted_goals": 2.37,
+    "success": true
+  },
+  "game-2026-04-16-STL-UTA": {
+    "win_probability": 73.8,
+    "predicted_goals": 2.59,
+    "success": true
+  },
+  "game-2026-01-26-UTA-TBL": {
+    "win_probability": 92.4,
+    "predicted_goals": 5.22,
+    "success": true
+  },
+  "game-2026-01-29-WPG-TBL": {
+    "win_probability": 95.5,
+    "predicted_goals": 4.12,
+    "success": true
+  },
+  "game-2026-02-25-TOR-TBL": {
+    "win_probability": 92.7,
+    "predicted_goals": 4.25,
+    "success": true
+  },
+  "game-2026-03-05-TBL-WPG": {
+    "win_probability": 33.3,
+    "predicted_goals": 1.74,
+    "success": true
+  },
+  "game-2026-03-07-TBL-TOR": {
+    "win_probability": 14.4,
+    "predicted_goals": 2.36,
+    "success": true
+  },
+  "game-2026-03-19-TBL-VAN": {
+    "win_probability": 2.8,
+    "predicted_goals": 2.89,
+    "success": true
+  },
+  "game-2026-01-31-TOR-VAN": {
+    "win_probability": 11,
+    "predicted_goals": 3.19,
+    "success": true
+  },
+  "game-2026-04-08-WSH-TOR": {
+    "win_probability": 35.5,
+    "predicted_goals": 3.02,
+    "success": true
+  },
+  "game-2026-02-02-VAN-UTA": {
+    "win_probability": 63,
+    "predicted_goals": 2.37,
+    "success": true
+  },
+  "game-2026-03-03-UTA-WSH": {
+    "win_probability": 54.2,
+    "predicted_goals": 2.62,
+    "success": true
+  },
+  "game-2026-03-19-UTA-VEG": {
+    "win_probability": 96.3,
+    "predicted_goals": 4.35,
+    "success": true
+  },
+  "game-2026-03-26-WSH-UTA": {
+    "win_probability": 42.5,
+    "predicted_goals": 2.17,
+    "success": true
+  },
+  "game-2026-04-04-UTA-VAN": {
+    "win_probability": 25.2,
+    "predicted_goals": 3.38,
+    "success": true
+  },
+  "game-2026-04-14-WPG-UTA": {
+    "win_probability": 57.5,
+    "predicted_goals": 2.42,
+    "success": true
+  },
+  "game-2026-02-04-VAN-VEG": {
+    "win_probability": 96.2,
+    "predicted_goals": 3.88,
+    "success": true
+  },
+  "game-2026-02-25-WPG-VAN": {
+    "win_probability": 24.1,
+    "predicted_goals": 3.59,
+    "success": true
+  },
+  "game-2026-03-07-VAN-WPG": {
+    "win_probability": 92,
+    "predicted_goals": 2.55,
+    "success": true
+  },
+  "game-2026-03-30-VAN-VEG": {
+    "win_probability": 96.2,
+    "predicted_goals": 3.88,
+    "success": true
+  },
+  "game-2026-04-07-VEG-VAN": {
+    "win_probability": 10,
+    "predicted_goals": 3.06,
+    "success": true
+  },
+  "game-2026-02-27-VEG-WSH": {
+    "win_probability": 56.9,
+    "predicted_goals": 3.32,
+    "success": true
+  },
+  "game-2026-03-24-VEG-WPG": {
+    "win_probability": 56.6,
+    "predicted_goals": 2.76,
+    "success": true
+  },
+  "game-2026-03-28-WSH-VEG": {
+    "win_probability": 99.2,
+    "predicted_goals": 4.2,
+    "success": true
+  },
+  "game-2026-04-13-WPG-VEG": {
+    "win_probability": 98,
+    "predicted_goals": 3.64,
+    "success": true
+  }
+}

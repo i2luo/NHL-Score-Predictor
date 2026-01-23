@@ -28,6 +28,8 @@ wheels/
 !nhl_games_*.json
 !nhl_injuries*.json
 *.json
+# Allow predictions.json (needed for Vercel deployment) - exception must come after *.json
+!frontend/data/predictions.json
 *.csv
 *.db
 *.sqlite
