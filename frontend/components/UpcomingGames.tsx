@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { Game } from '@/types/game';
 import GameCard from './GameCard';
+import { gameStart } from '@/lib/utils';
 import { Clock } from 'lucide-react';
 
 interface UpcomingGamesProps {
@@ -34,12 +35,10 @@ export default function UpcomingGames({ games, onGameSelect }: UpcomingGamesProp
   const in48Hours = new Date(now.getTime() + 48 * 60 * 60 * 1000);
   
   const upcomingGames = games.filter(game => {
-    const gameDate = new Date(`${game.date}T${game.time}`);
-    // Only show future games from 2026 season
+    const gameDate = gameStart(game);
     const isFuture = gameDate > now;
     const isIn48Hours = gameDate <= in48Hours;
-    const is2026Season = game.date.startsWith('2026') || game.date.startsWith('2025-10') || game.date.startsWith('2025-11') || game.date.startsWith('2025-12');
-    return isFuture && isIn48Hours && is2026Season;
+    return isFuture && isIn48Hours;
   });
 
   return (

@@ -12,10 +12,10 @@ numpy==1.26.3
 # Optional: lxml is faster but not required (html.parser is built-in)
 # lxml==5.1.0
 
-# For injury scraper (bypasses Cloudflare)
-# Option 1: Playwright (recommended - more reliable)
-playwright==1.40.0
-# After installing, run: playwright install chromium
+# Injury scraper: ESPN's JSON endpoint is the primary source (plain requests).
+# Playwright is only used for the PuckPedia fallback.
+# After installing, run: python -m playwright install chromium
+playwright==1.60.0
 
 # Option 2: Selenium (alternative)
 # selenium==4.15.2

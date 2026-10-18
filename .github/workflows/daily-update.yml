@@ -2,47 +2,67 @@ name: Daily Update
 
 on:
   schedule:
-    # Run at 12pm Eastern Time (5pm UTC, or 4pm UTC during DST)
-    # Adjust the hour if needed: 17 = 5pm UTC = 12pm EST, 16 = 4pm UTC = 12pm EDT
-    - cron: '0 17 * * *'  # 5pm UTC = 12pm EST
-  workflow_dispatch:  # Allow manual triggering
+    # 12pm Eastern. Cron runs in UTC and does not follow DST, so this fires at
+    # 12pm EDT (Mar–Nov) and 11am EST (Nov–Mar). Both are after the previous
+    # night's games are final and before the day's games start.
+    - cron: '0 16 * * *'
+  workflow_dispatch:  # Allow manual triggering from the Actions tab
+
+# The default GITHUB_TOKEN is read-only unless the workflow asks for more.
+# Without this the final `git push` fails with a 403.
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-update
+  cancel-in-progress: false
 
 jobs:
   update:
     runs-on: ubuntu-latest
-    
+    timeout-minutes: 45
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-      
+        uses: actions/checkout@v4
+
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      
+          cache: 'pip'
+
       - name: Install Python dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install playwright
-          playwright install chromium
-      
+        run: pip install -r requirements.txt
+
+      - name: Install Playwright browser (PuckPedia fallback for the injury scraper)
+        # Injuries come from ESPN's JSON API; the browser is only needed if that
+        # fails, so a problem installing it must not fail the whole run.
+        # --with-deps installs the system libraries Chromium needs on the runner.
+        run: python -m playwright install --with-deps chromium
+        continue-on-error: true
+
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
-      
+
       - name: Run daily update
-        run: |
-          python3 scripts/daily_update.py
-        env:
-          PLAYWRIGHT_BROWSERS_PATH: 0
-      
+        run: python scripts/daily_update.py
+
       - name: Commit and push changes
+        # Run even if the update script failed partway (e.g. predictions timed
+        # out) so that any freshly scraped games/injuries still get published.
+        if: always()
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add nhl_games_2021_2026.json nhl_injuries.json nhl_injuries_detailed.json frontend/data/predictions.json
-          git diff --staged --quiet || git commit -m "Daily update: $(date +'%Y-%m-%d %H:%M:%S')"
+          if git diff --staged --quiet; then
+            echo "No data changes to commit"
+            exit 0
+          fi
+          git commit -m "Daily update: $(date -u +'%Y-%m-%d %H:%M:%S') UTC"
+          # Re-sync in case something else was pushed while this job ran
+          git pull --rebase origin ${{ github.ref_name }}
           git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

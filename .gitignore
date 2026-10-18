@@ -14,6 +14,7 @@ downloads/
 eggs/
 .eggs/
 lib/
+!frontend/lib/
 lib64/
 parts/
 sdist/
@@ -24,20 +25,33 @@ wheels/
 *.egg
 
 # Data files
-# Allow game data and injury data JSON files (needed for deployment)
-!nhl_games_*.json
-!nhl_injuries*.json
 *.json
-# Allow predictions.json (needed for Vercel deployment) - exception must come after *.json
+# Exceptions must come AFTER the pattern they override.
+# The game/injury data and pre-computed predictions are committed because the
+# deployed site reads them and the daily GitHub Action updates them.
+!/nhl_games_*.json
+!/nhl_injuries*.json
 !frontend/data/predictions.json
+# Config files that must stay tracked
+!package.json
+!package-lock.json
+!tsconfig.json
+!vercel.json
+!*.config.json
+# frontend/data/ copies of the raw data are build artifacts (copied at build/update time)
+frontend/data/nhl_*.json
 *.csv
 *.db
 *.sqlite
 
 # Model files
-models/
+# The trained models in /models are committed: the daily GitHub Action needs
+# them to regenerate predictions. Copies made at Vercel build time are not.
+frontend/models/
 *.pkl
 *.joblib
+!/models/*.pkl
+!/models/*.txt
 
 # Plot files
 plots/

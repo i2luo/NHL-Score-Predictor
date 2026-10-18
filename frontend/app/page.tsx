@@ -7,6 +7,7 @@ import { generateUpcomingGames } from '@/lib/mockData';
 import UpcomingGames from '@/components/UpcomingGames';
 import GameFinder from '@/components/GameFinder';
 import SimulatorView from '@/components/SimulatorView';
+import MockDataBanner from '@/components/MockDataBanner';
 import { Search, Calendar } from 'lucide-react';
 
 export default function Home() {
@@ -15,6 +16,8 @@ export default function Home() {
   const [upcomingGames, setUpcomingGames] = useState<Game[]>([]);
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  // Non-null when the upcoming list is placeholder data; holds the reason for the banner
+  const [mockDataReason, setMockDataReason] = useState<string | null>(null);
 
   // Memoize onUpdate to prevent infinite loops - MUST be at top level (not conditional)
   const handleGameUpdate = useCallback((updatedGame: Game) => {
@@ -85,10 +88,12 @@ export default function Home() {
         
         if (games.length > 0) {
           setUpcomingGames(games);
+          setMockDataReason(null);
           console.log('[Frontend] Using API data');
         } else {
           // Fallback to mock data if API returns empty
           console.warn('[Frontend] No games from API, using mock data');
+          setMockDataReason('The API returned no upcoming games (the daily data update may not have run).');
           const mockGames = generateUpcomingGames();
           
           // Try to attach real injury data to mock games
@@ -121,6 +126,7 @@ export default function Home() {
       } catch (error) {
         console.error('[Frontend] Error loading games, using mock data:', error);
         // Fallback to mock data on error
+        setMockDataReason('The game data API could not be reached.');
         setUpcomingGames(generateUpcomingGames());
       } finally {
         setIsLoading(false);
@@ -196,10 +202,13 @@ export default function Home() {
             <p className="text-slate-400">Loading games...</p>
           </div>
         ) : view === 'upcoming' ? (
-          <UpcomingGames 
-            games={upcomingGames} 
-            onGameSelect={setSelectedGame}
-          />
+          <>
+            {mockDataReason && <MockDataBanner reason={mockDataReason} />}
+            <UpcomingGames 
+              games={upcomingGames} 
+              onGameSelect={setSelectedGame}
+            />
+          </>
         ) : (
           <GameFinder onGameSelect={setSelectedGame} />
         )}

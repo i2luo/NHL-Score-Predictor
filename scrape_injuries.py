@@ -1,6 +1,11 @@
 """
 NHL Score Predictor - Injury Data Scraper
-Scrapes player injury data from puckpedia.com using Selenium to bypass Cloudflare
+
+Primary source: ESPN's public injuries JSON endpoint (plain HTTP, no bot
+protection, works unattended on CI).
+Fallback source: puckpedia.com rendered with Playwright. PuckPedia sits behind
+Cloudflare, which intermittently serves a JavaScript challenge that a headless
+browser cannot pass, so it is only tried when ESPN fails.
 """
 
 try:
@@ -11,10 +16,25 @@ except ImportError:
 
 from bs4 import BeautifulSoup
 import json
+import sys
 import time
 import os
-from typing import Dict, List
+import requests
+from typing import Dict, List, Optional
 from datetime import datetime
+
+ESPN_INJURIES_URL = "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/injuries"
+
+# ESPN uses a few abbreviations that differ from hockey-reference's
+ESPN_ABBR_TO_ABBR = {
+    'LA': 'LAK',
+    'NJ': 'NJD',
+    'SJ': 'SJS',
+    'TB': 'TBL',
+    'VGK': 'VEG',
+    'UTAH': 'UTA',
+    'ARI': 'UTA',
+}
 
 # Mapping from PuckPedia team names to abbreviations
 TEAM_NAME_TO_ABBR = {
@@ -47,11 +67,19 @@ TEAM_NAME_TO_ABBR = {
     'Tampa Bay Lightning': 'TBL',
     'Toronto Maple Leafs': 'TOR',
     'Utah': 'UTA',
+    'Utah Hockey Club': 'UTA',
+    'Utah Mammoth': 'UTA',
     'Vancouver Canucks': 'VAN',
     'Vegas Golden Knights': 'VEG',
     'Washington Capitals': 'WSH',
     'Winnipeg Jets': 'WPG',
 }
+
+# Preferred display name per abbreviation (first entry wins for UTA)
+ABBR_TO_TEAM_NAME: Dict[str, str] = {}
+for _name, _abbr in TEAM_NAME_TO_ABBR.items():
+    ABBR_TO_TEAM_NAME.setdefault(_abbr, _name)
+ABBR_TO_TEAM_NAME['UTA'] = 'Utah Mammoth'
 
 # Mapping from logo alt text to full team names
 LOGO_ALT_TO_TEAM = {
@@ -326,6 +354,154 @@ def parse_injuries_from_html(html_content: str) -> List[Dict]:
     return unique_injuries
 
 
+def _espn_team_abbr(team_obj: dict, team_display_name: Optional[str]) -> Optional[str]:
+    """Resolve an ESPN team object / display name to a hockey-reference abbreviation."""
+    name = (team_obj or {}).get('displayName') or team_display_name
+    if name and name in TEAM_NAME_TO_ABBR:
+        return TEAM_NAME_TO_ABBR[name]
+    abbr = ((team_obj or {}).get('abbreviation') or '').upper()
+    if abbr:
+        abbr = ESPN_ABBR_TO_ABBR.get(abbr, abbr)
+        if abbr in ABBR_TO_TEAM_NAME:
+            return abbr
+    return None
+
+
+def _normalize_espn_timeline(status: str) -> str:
+    status = (status or '').strip()
+    return {
+        'Day-To-Day': 'Day to Day',
+        'Injured Reserve': 'Injured Reserve',
+        'Out': 'Out',
+    }.get(status, status)
+
+
+def scrape_injuries_espn(max_attempts: int = 3) -> List[Dict]:
+    """
+    Fetch current NHL injuries from ESPN's public JSON endpoint.
+
+    Returns records in the same shape as the PuckPedia parser so the rest of the
+    pipeline (and the frontend) does not care which source produced them.
+    Raises on failure so the caller can fall back.
+    """
+    last_error: Optional[Exception] = None
+    for attempt in range(1, max_attempts + 1):
+        try:
+            response = requests.get(
+                ESPN_INJURIES_URL,
+                headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36'},
+                timeout=30,
+            )
+            response.raise_for_status()
+            payload = response.json()
+            break
+        except Exception as e:  # network error, non-200, invalid JSON
+            last_error = e
+            print(f"ESPN attempt {attempt}/{max_attempts} failed: {type(e).__name__}: {e}")
+            if attempt < max_attempts:
+                time.sleep(5 * attempt)
+    else:
+        raise RuntimeError(f"ESPN injuries request failed: {last_error}")
+
+    injuries: List[Dict] = []
+    scraped_at = datetime.now().isoformat()
+    for team_entry in payload.get('injuries', []):
+        team_display = team_entry.get('displayName')
+        for item in team_entry.get('injuries', []) or []:
+            athlete = item.get('athlete') or {}
+            team_abbr = _espn_team_abbr(athlete.get('team') or {}, team_display)
+            if not team_abbr:
+                print(f"  Skipping injury with unknown team: {team_display} / {athlete.get('team', {}).get('abbreviation')}")
+                continue
+
+            first = (athlete.get('firstName') or '').strip()
+            last = (athlete.get('lastName') or '').strip()
+            if first and last:
+                player = f"{last}, {first}"
+            else:
+                player = (athlete.get('displayName') or '').strip()
+            if not player:
+                continue
+
+            details = item.get('details') or {}
+            injuries.append({
+                'player': player,
+                'team': team_abbr,
+                'team_name': ABBR_TO_TEAM_NAME.get(team_abbr, team_display),
+                'timeline': _normalize_espn_timeline(item.get('status', '')),
+                'status': 'OUT',
+                'reason': (details.get('type') or item.get('shortComment') or '').strip(),
+                'scraped_date': scraped_at,
+                'source': 'espn',
+            })
+
+    if not injuries:
+        raise RuntimeError("ESPN returned a valid response but no injury records")
+
+    print(f"Fetched {len(injuries)} injury records from ESPN")
+    return injuries
+
+
+def _fetch_injury_html_once(p) -> str:
+    """Load the injuries page in a fresh headless browser and return its HTML."""
+    browser = p.chromium.launch(
+        headless=True,
+        # Flags that keep headless Chromium stable in containers / CI runners
+        args=['--disable-dev-shm-usage', '--no-sandbox', '--disable-gpu'],
+    )
+    try:
+        context = browser.new_context(
+            user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            viewport={'width': 1366, 'height': 900},
+        )
+        page = context.new_page()
+
+        print("Loading page...")
+        page.goto(INJURY_URL, wait_until='domcontentloaded', timeout=60000)
+
+        # The table is rendered client-side; also give a Cloudflare interstitial
+        # time to resolve (it reloads the page on its own).
+        print("Waiting for content to load...")
+        try:
+            page.wait_for_selector('tbody tr', timeout=45000, state='attached')
+        except Exception:
+            print("Table not found yet, waiting a little longer...")
+            page.wait_for_timeout(8000)
+
+        return page.content()
+    finally:
+        browser.close()
+
+
+def _scrape_with_playwright(max_attempts: int = 3) -> List[Dict]:
+    """
+    Fetch and parse the injuries page, retrying with a fresh browser when the
+    page crashes, Cloudflare blocks the request, or the table came back empty.
+    """
+    last_error = None
+    for attempt in range(1, max_attempts + 1):
+        try:
+            with sync_playwright() as p:
+                html = _fetch_injury_html_once(p)
+            injuries = parse_injuries_from_html(html)
+            if injuries:
+                return injuries
+            title = (html or '')[:2000]
+            blocked = 'Just a moment' in title or 'cf-chl' in title or 'challenge-platform' in title
+            last_error = 'Cloudflare challenge page returned' if blocked else 'page loaded but no injury rows were found'
+            print(f"Attempt {attempt}/{max_attempts}: {last_error}")
+        except Exception as e:
+            last_error = f"{type(e).__name__}: {e}"
+            print(f"Attempt {attempt}/{max_attempts} failed: {last_error}")
+
+        if attempt < max_attempts:
+            wait = 10 * attempt
+            print(f"Retrying in {wait}s...")
+            time.sleep(wait)
+
+    raise RuntimeError(f"Injury scrape failed after {max_attempts} attempts: {last_error}")
+
+
 def scrape_injuries_detailed(use_playwright: bool = True, html_file: str = None) -> List[Dict]:
     """
     Scrape detailed injury data including player names and status
@@ -364,8 +540,16 @@ def scrape_injuries_detailed(use_playwright: bool = True, html_file: str = None)
             traceback.print_exc()
             return injuries
     
+    # Primary source: ESPN JSON (reliable, no browser needed)
+    try:
+        print(f"Fetching injury data from ESPN ({ESPN_INJURIES_URL})...")
+        return scrape_injuries_espn()
+    except Exception as e:
+        print(f"ESPN source failed: {e}")
+        print("Falling back to PuckPedia...")
+
     if not PLAYWRIGHT_AVAILABLE and use_playwright:
-        print("ERROR: Playwright not available. Install with: pip install playwright")
+        print("ERROR: Playwright not available for the PuckPedia fallback. Install with: pip install playwright")
         print("Then run: playwright install chromium")
         print("\n💡 EASIER METHOD: Save the HTML page manually and use:")
         print("   python scrape_injuries.py --html-file injuries.html")
@@ -376,32 +560,7 @@ def scrape_injuries_detailed(use_playwright: bool = True, html_file: str = None)
         
         if use_playwright:
             print("Using Playwright to bypass Cloudflare protection...")
-            with sync_playwright() as p:
-                browser = p.chromium.launch(headless=True)
-                context = browser.new_context(
-                    user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-                )
-                page = context.new_page()
-                
-                print("Loading page...")
-                # Use 'domcontentloaded' instead of 'networkidle' - faster and more reliable
-                page.goto(INJURY_URL, wait_until='domcontentloaded', timeout=60000)
-                
-                # Wait for tbody to appear with a longer timeout
-                print("Waiting for content to load...")
-                try:
-                    page.wait_for_selector('tbody', timeout=30000, state='attached')
-                except:
-                    # If tbody doesn't appear, wait a bit and try to get content anyway
-                    print("Waiting additional time for dynamic content...")
-                    time.sleep(5)
-                
-                # Get page HTML
-                html = page.content()
-                browser.close()
-            
-            # Parse the HTML
-            injuries = parse_injuries_from_html(html)
+            injuries = _scrape_with_playwright(max_attempts=3)
             print(f"Scraped {len(injuries)} injury records")
         else:
             # Fallback to requests (will likely fail with 403)
@@ -484,12 +643,14 @@ def main():
                 print(f"  {team}: {count}")
         print("=" * 60)
     else:
-        print("\nNo injury data was scraped. Please check your connection and try again.")
-        print("\nCreating empty injury file template...")
-        # Create empty template
-        empty_counts: Dict[str, int] = {abbr: 0 for abbr in TEAM_NAME_TO_ABBR.values()}
-        save_injury_counts(empty_counts, "nhl_injuries.json")
-        print("You can manually edit nhl_injuries.json to add injury counts per team.")
+        # Do NOT overwrite the existing files: yesterday's injuries are far more
+        # useful than an all-zeros template. Signal failure to the caller instead.
+        print("\nNo injury data was scraped. Existing nhl_injuries*.json files were left unchanged.")
+        if not os.path.exists("nhl_injuries.json"):
+            empty_counts: Dict[str, int] = {abbr: 0 for abbr in TEAM_NAME_TO_ABBR.values()}
+            save_injury_counts(empty_counts, "nhl_injuries.json")
+            print("Created an empty nhl_injuries.json so the site can still start.")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

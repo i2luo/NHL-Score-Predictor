@@ -108,11 +108,44 @@ function isStartingGoalieInjured(injuredPlayers: InjuredPlayer[], team: string):
   });
 }
 
+// ---- Date helpers -----------------------------------------------------------
+// Scraped dates are 'YYYY-MM-DD' and times are 'HH:MM' in US Eastern (the
+// league's schedule timezone). `new Date('YYYY-MM-DD')` would parse as UTC
+// midnight, which is the previous evening in North America, so all date math
+// below works on calendar-day strings or on real instants built via
+// `easternToInstant` — never on bare `new Date(dateStr)`.
+
+const EASTERN_TZ = 'America/New_York';
+
+/** Minutes to add to Eastern wall-clock time to get UTC, for the given instant (-240 EDT / -300 EST). */
+function easternOffsetMinutes(at: Date): number {
+  const name = new Intl.DateTimeFormat('en-US', { timeZone: EASTERN_TZ, timeZoneName: 'shortOffset' })
+    .formatToParts(at)
+    .find(p => p.type === 'timeZoneName')?.value ?? 'GMT-5';
+  const m = name.match(/GMT([+-]\d{1,2})(?::(\d{2}))?/);
+  if (!m) return -300;
+  const hours = parseInt(m[1], 10);
+  const minutes = m[2] ? parseInt(m[2], 10) : 0;
+  return hours * 60 + Math.sign(hours) * minutes;
+}
+
+/** Convert an Eastern 'YYYY-MM-DD' + 'HH:MM' wall-clock time to an absolute instant. */
+function easternToInstant(dateStr: string, timeStr: string): Date {
+  const asIfUtc = new Date(`${dateStr}T${timeStr}:00Z`);
+  const offset = easternOffsetMinutes(asIfUtc);
+  return new Date(asIfUtc.getTime() - offset * 60_000);
+}
+
+/** Shift a 'YYYY-MM-DD' string by N calendar days (no timezone involved). */
+function shiftDateStr(dateStr: string, days: number): string {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d + days));
+  return dt.toISOString().slice(0, 10);
+}
+
 // Helper function to check if a team played the previous day (B2B)
-function isBackToBack(data: any[], team: string, gameDate: Date): boolean {
-  const previousDay = new Date(gameDate);
-  previousDay.setDate(previousDay.getDate() - 1);
-  const prevDateStr = previousDay.toISOString().split('T')[0];
+function isBackToBack(data: any[], team: string, gameDateStr: string): boolean {
+  const prevDateStr = shiftDateStr(gameDateStr, -1);
   
   // Check if team played on previous day
   return data.some((g: any) => 
@@ -123,23 +156,19 @@ function isBackToBack(data: any[], team: string, gameDate: Date): boolean {
 }
 
 // Helper function to calculate rest days status
-function calculateRestDays(data: any[], team: string, gameDate: Date): 'fresh' | 'back-to-back' | 'three-in-four' | 'four-in-six' {
-  const gameDateStr = gameDate.toISOString().split('T')[0];
-  
-  // Count games in last 6 days
-  const sixDaysAgo = new Date(gameDate);
-  sixDaysAgo.setDate(sixDaysAgo.getDate() - 6);
+function calculateRestDays(data: any[], team: string, gameDateStr: string): 'fresh' | 'back-to-back' | 'three-in-four' | 'four-in-six' {
+  // Count games in the 6 days before this one (string comparison works for ISO dates)
+  const sixDaysAgoStr = shiftDateStr(gameDateStr, -6);
   
   const recentGames = data.filter((g: any) => {
-    if (g.team !== team || !g.result) return false; // Only played games
-    const gDate = new Date(g.date);
-    return gDate >= sixDaysAgo && gDate < gameDate;
+    if (g.team !== team || !g.result || !g.date) return false; // Only played games
+    return g.date >= sixDaysAgoStr && g.date < gameDateStr;
   });
   
   const gameCount = recentGames.length;
   
   // Check for B2B
-  if (isBackToBack(data, team, gameDate)) {
+  if (isBackToBack(data, team, gameDateStr)) {
     return 'back-to-back';
   }
   
@@ -177,15 +206,14 @@ function convertToGameFormat(
       return;
     }
     
-    // Also check if date is in the future
-    const gameDate = new Date(game.date);
-    // For future games, set time to start of day for comparison
-    gameDate.setHours(0, 0, 0, 0);
-    const nowDate = new Date(now);
-    nowDate.setHours(0, 0, 0, 0);
+    // Use the scheduled start time (HH:MM, Eastern) when the scraper provided it; default to 7pm
+    const time = typeof game.game_time === 'string' && /^\d{2}:\d{2}$/.test(game.game_time)
+      ? game.game_time
+      : '19:00';
     
-    if (gameDate <= nowDate) {
-      // Skip games in the past (but allow today's games)
+    // Skip games whose puck drop has already passed (today's later games are kept)
+    const startInstant = easternToInstant(game.date, time);
+    if (startInstant <= now) {
       return;
     }
     
@@ -195,12 +223,12 @@ function convertToGameFormat(
     const awayTeam = isHome ? game.opponent : team;
     
     // Calculate B2B status from schedule
-    const homeB2B = isBackToBack(data, homeTeam, gameDate);
-    const awayB2B = isBackToBack(data, awayTeam, gameDate);
+    const homeB2B = isBackToBack(data, homeTeam, game.date);
+    const awayB2B = isBackToBack(data, awayTeam, game.date);
     
     // Calculate rest days
-    const homeRestDays = calculateRestDays(data, homeTeam, gameDate);
-    const awayRestDays = calculateRestDays(data, awayTeam, gameDate);
+    const homeRestDays = calculateRestDays(data, homeTeam, game.date);
+    const awayRestDays = calculateRestDays(data, awayTeam, game.date);
     
     // Get injury counts and detailed injuries from scraped data
     const homeInjuries = injuryCounts[homeTeam] || 0;
@@ -234,15 +262,13 @@ function convertToGameFormat(
     // Default to 50% for now
     let baseProb = 50;
     
-    // Default time to 7pm if not available
-    const time = '19:00';
-    
     games.push({
       id: `game-${game.date}-${awayTeam}-${homeTeam}`,
       homeTeam,
       awayTeam,
       date: game.date,
       time: time,
+      startTime: startInstant.toISOString(),
       homeGoalie,
       awayGoalie,
       isHomeBackToBack: homeB2B,
@@ -454,11 +480,15 @@ export async function GET(request: Request) {
     console.log(`[API] Total games before filtering: ${games.length}`);
     console.log(`[API] Current time: ${now.toISOString()}`);
     
+    // Absolute start instant (Eastern schedule time converted to UTC)
+    const startOf = (game: Game): Date =>
+      game.startTime ? new Date(game.startTime) : easternToInstant(game.date, game.time);
+    
     // Filter to upcoming games if requested
     if (upcoming) {
       const beforeFilter = games.length;
       games = games.filter(game => {
-        const gameDateTime = new Date(`${game.date}T${game.time}`);
+        const gameDateTime = startOf(game);
         const isFuture = gameDateTime > now;
         const isIn48Hours = gameDateTime <= in48Hours;
         return isFuture && isIn48Hours;
@@ -467,19 +497,12 @@ export async function GET(request: Request) {
     } else {
       // Only show future games
       const beforeFilter = games.length;
-      games = games.filter(game => {
-        const gameDateTime = new Date(`${game.date}T${game.time}`);
-        return gameDateTime > now;
-      });
+      games = games.filter(game => startOf(game) > now);
       console.log(`[API] Filtered ${beforeFilter} games to ${games.length} future games`);
     }
     
-    // Sort by date
-    games.sort((a, b) => {
-      const dateA = new Date(`${a.date}T${a.time}`);
-      const dateB = new Date(`${b.date}T${b.time}`);
-      return dateA.getTime() - dateB.getTime();
-    });
+    // Sort by start time
+    games.sort((a, b) => startOf(a).getTime() - startOf(b).getTime());
     
     console.log(`[API] ========== AFTER FILTERING AND SORTING ==========`);
     console.log(`[API] Total games after filtering: ${games.length}`);

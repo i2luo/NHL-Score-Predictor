@@ -21,12 +21,15 @@ if (!fs.existsSync(gamesDataPath)) {
 const allGames = JSON.parse(fs.readFileSync(gamesDataPath, 'utf-8'));
 console.log(`📊 Loaded ${allGames.length} total games`);
 
-// Filter to future games (no result = not played yet)
-const now = new Date();
+// Filter to future games (no result = not played yet).
+// Dates are Eastern calendar days; compare as strings against today's Eastern
+// date so tonight's games are included regardless of the machine's timezone.
+const todayEastern = new Intl.DateTimeFormat('en-CA', {
+  timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit',
+}).format(new Date()); // 'YYYY-MM-DD'
 const futureGames = allGames.filter(g => {
   if (!g.date || g.result) return false; // Skip games with results (already played)
-  const gameDate = new Date(g.date);
-  return gameDate > now;
+  return g.date >= todayEastern;
 });
 
 console.log(`📅 Found ${futureGames.length} future games\n`);
@@ -81,13 +84,14 @@ try {
   const inputJson = JSON.stringify(gamesForPrediction);
   console.log('🔄 Running batch predictions...\n');
   
+  const pythonBin = process.env.PYTHON_BIN || 'python3';
   const result = execSync(
-    `python3 "${pythonScript}"`,
+    `"${pythonBin}" "${pythonScript}"`,
     {
       input: inputJson,
       encoding: 'utf-8',
       cwd: path.join(__dirname, '..'),
-      timeout: 60000, // 60 second timeout
+      timeout: 600000, // 10 minutes: rolling/opponent features are recomputed over the whole dataset
       maxBuffer: 1024 * 1024 * 10 // 10MB buffer
     }
   );

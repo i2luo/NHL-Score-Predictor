@@ -5,6 +5,8 @@ import { Game } from '@/types/game';
 import { fetchAllFutureGames } from '@/lib/api';
 import { generateSeasonGames } from '@/lib/mockData';
 import { getTeamName, calculateWinProb } from '@/lib/calculations';
+import { gameStart } from '@/lib/utils';
+import MockDataBanner from './MockDataBanner';
 import { Search, Calendar, Filter } from 'lucide-react';
 import { format } from 'date-fns';
 
@@ -16,6 +18,7 @@ export default function GameFinder({ onGameSelect }: GameFinderProps) {
   const [allGames, setAllGames] = useState<Game[]>([]);
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [mockDataReason, setMockDataReason] = useState<string | null>(null);
 
   // Fetch real data from API, fallback to mock if API fails
   useEffect(() => {
@@ -26,14 +29,17 @@ export default function GameFinder({ onGameSelect }: GameFinderProps) {
         const games = await fetchAllFutureGames();
         if (games.length > 0) {
           setAllGames(games);
+          setMockDataReason(null);
         } else {
           // Fallback to mock data if API returns empty
           console.log('No games from API, using mock data');
+          setMockDataReason('The API returned no future games (the daily data update may not have run).');
           setAllGames(generateSeasonGames());
         }
       } catch (error) {
         console.error('Error loading games, using mock data:', error);
         // Fallback to mock data on error
+        setMockDataReason('The game data API could not be reached.');
         setAllGames(generateSeasonGames());
       } finally {
         setIsLoading(false);
@@ -52,7 +58,7 @@ export default function GameFinder({ onGameSelect }: GameFinderProps) {
     
     return allGames.filter(game => {
       // Only show future games (games that haven't happened yet)
-      const gameDateTime = new Date(`${game.date}T${game.time}`);
+      const gameDateTime = gameStart(game);
       if (gameDateTime <= now) {
         return false;
       }
@@ -108,6 +114,8 @@ export default function GameFinder({ onGameSelect }: GameFinderProps) {
           </p>
         </div>
       </div>
+
+      {!isLoading && mockDataReason && <MockDataBanner reason={mockDataReason} />}
 
       {/* Filters */}
       <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6 mb-6">

@@ -21,18 +21,119 @@ NHL_TEAMS = [
 ]
 
 BASE_URL = "https://www.hockey-reference.com/teams/{team}/{year}_gamelog.html"
+# The game log only lists completed games. The schedule page lists the full
+# season (played + upcoming), so it is used to discover future games.
+SCHEDULE_URL = "https://www.hockey-reference.com/teams/{team}/{year}_games.html"
+
+REQUEST_HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+}
+
+# sports-reference.com allows ~20 requests per minute per client and answers
+# with HTTP 429 beyond that, so keep at least 3 seconds between requests.
+# Exceeding the limit repeatedly gets the client IP blocked for about an hour
+# (429 with a very large Retry-After).
+DEFAULT_DELAY = 3.5
+
+# Longest we are willing to sleep for a single Retry-After. Beyond this the IP
+# is "jailed"; further requests are pointless (and may extend the block), so
+# the scraper stops making them for the rest of the run.
+MAX_RETRY_WAIT_SECONDS = 120.0
+_blocked_until: float = 0.0
+
+
+class RateLimitedError(requests.exceptions.RequestException):
+    """Raised when hockey-reference has blocked this client for a long period."""
+
+
+def is_rate_limited() -> bool:
+    """True while hockey-reference has this client blocked (see _fetch)."""
+    return time.time() < _blocked_until
+
+
+def _fetch(url: str, max_attempts: int = 4) -> requests.Response:
+    """
+    GET a hockey-reference page, backing off and retrying on 429 / 5xx.
+    Honors the Retry-After header when present. Raises on final failure or on
+    other HTTP errors (e.g. 404 for a franchise that did not exist that season).
+    """
+    global _blocked_until
+    if time.time() < _blocked_until:
+        raise RateLimitedError(
+            f"skipped {url}: rate-limited by hockey-reference for another "
+            f"{(_blocked_until - time.time()) / 60:.0f} min"
+        )
+
+    last_exc: Optional[Exception] = None
+    for attempt in range(1, max_attempts + 1):
+        try:
+            response = requests.get(url, headers=REQUEST_HEADERS, timeout=20)
+            if response.status_code == 429 or response.status_code >= 500:
+                retry_after = response.headers.get('Retry-After')
+                try:
+                    wait = float(retry_after) if retry_after else 0.0
+                except ValueError:
+                    wait = 0.0
+                wait = max(wait, 15.0 * attempt)  # 15s, 30s, 45s ...
+                if wait > MAX_RETRY_WAIT_SECONDS:
+                    _blocked_until = time.time() + wait
+                    raise RateLimitedError(
+                        f"HTTP {response.status_code} for {url} with Retry-After={wait:.0f}s; "
+                        f"giving up on hockey-reference for this run"
+                    )
+                print(f"  HTTP {response.status_code} for {url}; waiting {wait:.0f}s before retry {attempt}/{max_attempts - 1}")
+                if attempt == max_attempts:
+                    response.raise_for_status()
+                time.sleep(wait)
+                continue
+            response.raise_for_status()
+            return response
+        except RateLimitedError:
+            raise
+        except requests.exceptions.HTTPError:
+            raise
+        except requests.exceptions.RequestException as e:
+            # Connection errors / timeouts: retry with a short pause
+            last_exc = e
+            if attempt == max_attempts:
+                raise
+            print(f"  Request error for {url}: {e}; retrying ({attempt}/{max_attempts - 1})")
+            time.sleep(5.0 * attempt)
+    raise last_exc or RuntimeError(f"Failed to fetch {url}")
 
 
 def get_current_season_year() -> int:
     """Get the current NHL season year (e.g., 2026 for 2025-26 season)"""
     now = datetime.now()
-    # NHL season typically starts in October, so if we're past October, use next year
-    if now.month >= 10:
+    # The regular season starts late September / early October, so from
+    # September onward the "season year" is the following calendar year.
+    if now.month >= 9:
         return now.year + 1
     return now.year
 
 
-def scrape_team_gamelog(team: str, year: int, delay: float = 1.0) -> List[Dict]:
+def teams_for_season(year: int) -> List[str]:
+    """
+    Return the team abbreviations that existed for a given season year.
+    Arizona (ARI) relocated to Utah (UTA) starting with the 2024-25 season
+    (year == 2025); requesting the missing franchise just produces a 404.
+    """
+    if year >= 2025:
+        return [t for t in NHL_TEAMS if t != 'ARI']
+    return [t for t in NHL_TEAMS if t != 'UTA']
+
+
+def _normalize_game_time(raw: Optional[str]) -> Optional[str]:
+    """Convert hockey-reference's '7:00 PM' style time to 'HH:MM' (24h)."""
+    if not raw:
+        return None
+    try:
+        return datetime.strptime(raw.strip().upper(), '%I:%M %p').strftime('%H:%M')
+    except ValueError:
+        return None
+
+
+def scrape_team_gamelog(team: str, year: int, delay: float = DEFAULT_DELAY) -> List[Dict]:
     """
     Scrape game log data for a specific team and season
     
@@ -49,13 +150,7 @@ def scrape_team_gamelog(team: str, year: int, delay: float = 1.0) -> List[Dict]:
     print(f"Scraping {team} {year-1}-{year} season...")
     
     try:
-        # Add headers to mimic a browser request
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        }
-        
-        response = requests.get(url, headers=headers, timeout=10)
-        response.raise_for_status()
+        response = _fetch(url)
         
         # Try lxml first, fall back to html.parser if not available
         try:
@@ -98,6 +193,7 @@ def scrape_team_gamelog(team: str, year: int, delay: float = 1.0) -> List[Dict]:
                 'rank': _get_cell_text(row, 'ranker'),
                 'game_num': _get_cell_text(row, 'team_game_num_season'),
                 'date': _get_cell_text(row, 'date'),
+                'game_time': None,  # not available on the game log page (see scrape_team_schedule)
                 'game_location': _get_cell_text(row, 'game_location'),  # @ for away, empty for home
                 'opponent': _get_cell_text(row, 'opp_name_abbr'),
                 'result': _get_cell_text(row, 'team_game_result'),  # W, L, T
@@ -196,7 +292,124 @@ def _get_cell_text(row, data_stat: str) -> Optional[str]:
     return text if text else None
 
 
-def scrape_all_teams(year: Optional[int] = None, delay: float = 1.0) -> List[Dict]:
+def _empty_game_record(team: str, year: int) -> Dict:
+    """A game record with every stat field present (None) so all rows share a schema."""
+    stat_fields = [
+        'rank', 'game_num', 'date', 'game_time', 'game_location', 'opponent', 'result',
+        'goals_for', 'goals_against', 'overtime', 'shots', 'penalty_minutes',
+        'power_play_goals', 'power_play_opportunities', 'short_handed_goals',
+        'shots_against', 'opp_penalty_minutes', 'opp_power_play_goals',
+        'opp_power_play_opportunities', 'opp_short_handed_goals', 'faceoff_wins',
+        'faceoff_losses', 'faceoff_percentage', 'corsi_for', 'corsi_against',
+        'corsi_percentage', 'fenwick_for', 'fenwick_against', 'fenwick_percentage',
+        'offensive_zone_start_pct', 'pdo',
+    ]
+    record = {'team': team, 'season': f"{year-1}-{year}"}
+    record.update({field: None for field in stat_fields})
+    return record
+
+
+def scrape_team_schedule(team: str, year: int, delay: float = DEFAULT_DELAY,
+                         future_only: bool = True) -> List[Dict]:
+    """
+    Scrape the season schedule page for a team and return UPCOMING games.
+
+    hockey-reference's game log page only contains games that have already been
+    played, so this is the only way to learn about future matchups. Records use
+    the same keys as scrape_team_gamelog (stats are None, result is None) and
+    additionally carry 'game_time' as 'HH:MM' (Eastern) when available.
+    """
+    url = SCHEDULE_URL.format(team=team, year=year)
+    print(f"Scraping {team} {year-1}-{year} schedule...")
+
+    try:
+        response = _fetch(url)
+
+        try:
+            soup = BeautifulSoup(response.content, 'lxml')
+        except Exception:
+            soup = BeautifulSoup(response.content, 'html.parser')
+
+        table = soup.find('table', {'id': 'games'})
+        tbody = table.find('tbody') if table else None
+        if not tbody:
+            print(f"  Warning: Schedule table not found for {team}")
+            return []
+
+        games = []
+        for row in tbody.find_all('tr'):
+            if 'thead' in row.get('class', []):
+                continue
+
+            date = _get_cell_text(row, 'date_game')
+            if not date or date == 'Date':
+                continue
+
+            outcome = _get_cell_text(row, 'game_outcome')
+            if future_only and outcome:
+                continue  # already played; the game log has the full stats
+
+            # Opponent is shown by full name; the abbreviation is in the link href
+            # (e.g. /teams/EDM/). Fall back to the text if no link is present.
+            opp_cell = row.find(['th', 'td'], {'data-stat': 'opp_name'})
+            opponent = None
+            if opp_cell:
+                link = opp_cell.find('a')
+                href = link.get('href', '') if link else ''
+                parts = [p for p in href.split('/') if p]
+                if len(parts) >= 2 and parts[0] == 'teams':
+                    opponent = parts[1].upper()
+                else:
+                    opponent = opp_cell.get_text(strip=True) or None
+            if not opponent:
+                continue
+
+            game = _empty_game_record(team, year)
+            game.update({
+                'game_num': _get_cell_text(row, 'games'),
+                'date': date,
+                'game_time': _normalize_game_time(_get_cell_text(row, 'time_game')),
+                'game_location': _get_cell_text(row, 'game_location'),
+                'opponent': opponent,
+                'result': outcome or None,
+            })
+            games.append(game)
+
+        print(f"  Found {len(games)} {'upcoming' if future_only else ''} games for {team}")
+        time.sleep(delay)
+        return games
+
+    except requests.exceptions.RequestException as e:
+        print(f"  Error fetching schedule for {team}: {e}")
+        return []
+    except Exception as e:
+        print(f"  Error parsing schedule for {team}: {e}")
+        return []
+
+
+def scrape_all_schedules(year: Optional[int] = None, delay: float = DEFAULT_DELAY) -> List[Dict]:
+    """Scrape upcoming games from the schedule page for every team in a season."""
+    if year is None:
+        year = get_current_season_year()
+
+    teams = teams_for_season(year)
+    all_games = []
+
+    print(f"Scraping NHL schedules (upcoming games) for {year-1}-{year} season...")
+    print(f"Total teams: {len(teams)}\n")
+
+    for i, team in enumerate(teams, 1):
+        if is_rate_limited():
+            print(f"Rate-limited by hockey-reference; skipping remaining {len(teams) - i + 1} schedules this run")
+            break
+        print(f"[{i}/{len(teams)}] ", end="")
+        all_games.extend(scrape_team_schedule(team, year, delay))
+
+    print(f"\nTotal upcoming games scraped for {year-1}-{year}: {len(all_games)}")
+    return all_games
+
+
+def scrape_all_teams(year: Optional[int] = None, delay: float = DEFAULT_DELAY) -> List[Dict]:
     """
     Scrape game log data for all NHL teams for a single season
     
@@ -210,13 +423,17 @@ def scrape_all_teams(year: Optional[int] = None, delay: float = 1.0) -> List[Dic
     if year is None:
         year = get_current_season_year()
     
+    teams = teams_for_season(year)
     all_games = []
     
     print(f"Scraping NHL game logs for {year-1}-{year} season...")
-    print(f"Total teams: {len(NHL_TEAMS)}\n")
+    print(f"Total teams: {len(teams)}\n")
     
-    for i, team in enumerate(NHL_TEAMS, 1):
-        print(f"[{i}/{len(NHL_TEAMS)}] ", end="")
+    for i, team in enumerate(teams, 1):
+        if is_rate_limited():
+            print(f"Rate-limited by hockey-reference; skipping remaining {len(teams) - i + 1} teams this run")
+            break
+        print(f"[{i}/{len(teams)}] ", end="")
         games = scrape_team_gamelog(team, year, delay)
         all_games.extend(games)
     
@@ -224,7 +441,7 @@ def scrape_all_teams(year: Optional[int] = None, delay: float = 1.0) -> List[Dic
     return all_games
 
 
-def scrape_multiple_seasons(years: List[int], delay: float = 1.0) -> List[Dict]:
+def scrape_multiple_seasons(years: List[int], delay: float = DEFAULT_DELAY) -> List[Dict]:
     """
     Scrape game log data for all NHL teams across multiple seasons
     
@@ -310,7 +527,7 @@ def main():
     seasons = get_past_seasons(num_seasons=5)
     
     # Scrape all teams for all seasons
-    all_games = scrape_multiple_seasons(seasons, delay=1.5)
+    all_games = scrape_multiple_seasons(seasons, delay=DEFAULT_DELAY)
     
     if all_games:
         # Create filename with season range

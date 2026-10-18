@@ -12,8 +12,9 @@ export interface Game {
   id: string;
   homeTeam: string;
   awayTeam: string;
-  date: string;
-  time: string;
+  date: string;        // 'YYYY-MM-DD' (Eastern calendar day)
+  time: string;        // 'HH:MM' puck drop, US Eastern
+  startTime?: string;  // ISO-8601 absolute instant of puck drop (set by the API; absent on mock data)
   homeGoalie: GoalieType;
   awayGoalie: GoalieType;
   isHomeBackToBack: boolean;
