@@ -1,14 +1,4 @@
 {
-  "game-2026-10-23-MTL-CHI": {
-    "win_probability": 36.4,
-    "predicted_goals": 3.14,
-    "success": true
-  },
-  "game-2026-10-23-TBL-COL": {
-    "win_probability": 42.2,
-    "predicted_goals": 3.34,
-    "success": true
-  },
   "game-2026-10-24-ANA-PHI": {
     "win_probability": 35.5,
     "predicted_goals": 2.8,
