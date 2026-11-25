@@ -3,10 +3,10 @@
     "player": "Carlsson, Leo",
     "team": "ANA",
     "team_name": "Anaheim Ducks",
-    "timeline": "Out",
+    "timeline": "Day to Day",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -16,7 +16,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -26,7 +26,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Knee",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -36,7 +36,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -46,7 +46,17 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Back",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
+    "source": "espn"
+  },
+  {
+    "player": "Kozak, Tyson",
+    "team": "BUF",
+    "team_name": "Buffalo Sabres",
+    "timeline": "Day to Day",
+    "status": "OUT",
+    "reason": "Undisclosed",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -56,7 +66,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -66,7 +76,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -76,7 +86,17 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
+    "source": "espn"
+  },
+  {
+    "player": "Frost, Morgan",
+    "team": "CGY",
+    "team_name": "Calgary Flames",
+    "timeline": "Day to Day",
+    "status": "OUT",
+    "reason": "Upper Body",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -86,7 +106,7 @@
     "timeline": "Out",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -96,7 +116,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Hip",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -106,37 +126,17 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Achilles",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
     "player": "Ehlers, Nikolaj",
     "team": "CAR",
     "team_name": "Carolina Hurricanes",
-    "timeline": "Day to Day",
+    "timeline": "Out",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
-    "source": "espn"
-  },
-  {
-    "player": "Frondell, Anton",
-    "team": "CHI",
-    "team_name": "Chicago Blackhawks",
-    "timeline": "Day to Day",
-    "status": "OUT",
-    "reason": "Undisclosed",
-    "scraped_date": "2026-11-24T02:49:03.782392",
-    "source": "espn"
-  },
-  {
-    "player": "Kaiser, Wyatt",
-    "team": "CHI",
-    "team_name": "Chicago Blackhawks",
-    "timeline": "Suspension",
-    "status": "OUT",
-    "reason": "Suspension",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -146,7 +146,27 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Shoulder",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
+    "source": "espn"
+  },
+  {
+    "player": "Frondell, Anton",
+    "team": "CHI",
+    "team_name": "Chicago Blackhawks",
+    "timeline": "Day to Day",
+    "status": "OUT",
+    "reason": "Undisclosed",
+    "scraped_date": "2026-11-25T00:25:04.478103",
+    "source": "espn"
+  },
+  {
+    "player": "Kaiser, Wyatt",
+    "team": "CHI",
+    "team_name": "Chicago Blackhawks",
+    "timeline": "Suspension",
+    "status": "OUT",
+    "reason": "Suspension",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -156,27 +176,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
-    "source": "espn"
-  },
-  {
-    "player": "Brindley, Gavin",
-    "team": "COL",
-    "team_name": "Colorado Avalanche",
-    "timeline": "Out",
-    "status": "OUT",
-    "reason": "Concussion",
-    "scraped_date": "2026-11-24T02:49:03.782392",
-    "source": "espn"
-  },
-  {
-    "player": "MacKinnon, Nathan",
-    "team": "COL",
-    "team_name": "Colorado Avalanche",
-    "timeline": "Out",
-    "status": "OUT",
-    "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -186,7 +186,27 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
+    "source": "espn"
+  },
+  {
+    "player": "Brindley, Gavin",
+    "team": "COL",
+    "team_name": "Colorado Avalanche",
+    "timeline": "Out",
+    "status": "OUT",
+    "reason": "Concussion",
+    "scraped_date": "2026-11-25T00:25:04.478103",
+    "source": "espn"
+  },
+  {
+    "player": "MacKinnon, Nathan",
+    "team": "COL",
+    "team_name": "Colorado Avalanche",
+    "timeline": "Out",
+    "status": "OUT",
+    "reason": "Lower Body",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -196,7 +216,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Ankle",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -206,27 +226,27 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
     "player": "Olivier, Mathieu",
     "team": "CBJ",
     "team_name": "Columbus Blue Jackets",
-    "timeline": "Out",
+    "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
     "player": "Monahan, Sean",
     "team": "CBJ",
     "team_name": "Columbus Blue Jackets",
-    "timeline": "Out",
+    "timeline": "Day to Day",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -236,7 +256,7 @@
     "timeline": "Day to Day",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -246,7 +266,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Finger",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -256,7 +276,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Leg",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -266,7 +286,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -276,7 +296,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -286,7 +306,7 @@
     "timeline": "Day to Day",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -296,27 +316,17 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Contract Dispute",
-    "scraped_date": "2026-11-24T02:49:03.782392",
-    "source": "espn"
-  },
-  {
-    "player": "Nugent-Hopkins, Ryan",
-    "team": "EDM",
-    "team_name": "Edmonton Oilers",
-    "timeline": "Day to Day",
-    "status": "OUT",
-    "reason": "Undisclosed",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
     "player": "Hyman, Zach",
     "team": "EDM",
     "team_name": "Edmonton Oilers",
-    "timeline": "Day to Day",
+    "timeline": "Out",
     "status": "OUT",
-    "reason": "Illness",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "reason": "Impaired Vision",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -326,7 +336,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Undisclosed",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -336,7 +346,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -346,7 +356,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Knee",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -356,7 +366,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Undisclosed",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -366,7 +376,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Knee",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -376,7 +386,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Knee",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -386,7 +396,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Neck",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -396,7 +406,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Hand",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -406,7 +416,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -416,7 +426,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -426,7 +436,17 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
+    "source": "espn"
+  },
+  {
+    "player": "Matheson, Mike",
+    "team": "MTL",
+    "team_name": "Montreal Canadiens",
+    "timeline": "Injured Reserve",
+    "status": "OUT",
+    "reason": "Lower Body",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -436,17 +456,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Ankle",
-    "scraped_date": "2026-11-24T02:49:03.782392",
-    "source": "espn"
-  },
-  {
-    "player": "Matheson, Mike",
-    "team": "MTL",
-    "team_name": "Montreal Canadiens",
-    "timeline": "Out",
-    "status": "OUT",
-    "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -456,7 +466,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -466,7 +476,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -476,7 +486,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Undisclosed",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -486,7 +496,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Undisclosed",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -496,7 +506,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Neck",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -506,7 +516,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Ankle",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -516,17 +526,17 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Knee",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
     "player": "Palmieri, Kyle",
     "team": "NYI",
     "team_name": "New York Islanders",
-    "timeline": "Out",
+    "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -536,7 +546,7 @@
     "timeline": "Out",
     "status": "OUT",
     "reason": "Shoulder",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -546,27 +556,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Knee",
-    "scraped_date": "2026-11-24T02:49:03.782392",
-    "source": "espn"
-  },
-  {
-    "player": "Bjorkstrand, Oliver",
-    "team": "NYR",
-    "team_name": "New York Rangers",
-    "timeline": "Injured Reserve",
-    "status": "OUT",
-    "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
-    "source": "espn"
-  },
-  {
-    "player": "Smits, Alberts",
-    "team": "NYR",
-    "team_name": "New York Rangers",
-    "timeline": "Injured Reserve",
-    "status": "OUT",
-    "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -576,7 +566,27 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
+    "source": "espn"
+  },
+  {
+    "player": "Bjorkstrand, Oliver",
+    "team": "NYR",
+    "team_name": "New York Rangers",
+    "timeline": "Injured Reserve",
+    "status": "OUT",
+    "reason": "Upper Body",
+    "scraped_date": "2026-11-25T00:25:04.478103",
+    "source": "espn"
+  },
+  {
+    "player": "Smits, Alberts",
+    "team": "NYR",
+    "team_name": "New York Rangers",
+    "timeline": "Injured Reserve",
+    "status": "OUT",
+    "reason": "Upper Body",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -586,7 +596,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -596,7 +606,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Knee",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -606,7 +616,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Undisclosed",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -616,17 +626,17 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
     "player": "Hodgson, Hayden",
     "team": "OTT",
     "team_name": "Ottawa Senators",
-    "timeline": "Out",
+    "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Groin",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -636,7 +646,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -646,7 +656,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Knee",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -656,7 +666,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Ankle",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -666,7 +676,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Back",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -676,7 +686,7 @@
     "timeline": "Day to Day",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -686,7 +696,7 @@
     "timeline": "Day to Day",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -696,7 +706,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -706,7 +716,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -716,7 +726,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -726,7 +736,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Knee",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -736,7 +746,7 @@
     "timeline": "Out",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -746,7 +756,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -756,7 +766,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -766,7 +776,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -776,7 +786,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -786,7 +796,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -796,17 +806,47 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
     "player": "McMichael, Connor",
     "team": "STL",
     "team_name": "St. Louis Blues",
-    "timeline": "Day to Day",
+    "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
+    "source": "espn"
+  },
+  {
+    "player": "Carlo, Brandon",
+    "team": "STL",
+    "team_name": "St. Louis Blues",
+    "timeline": "Injured Reserve",
+    "status": "OUT",
+    "reason": "Lower Body",
+    "scraped_date": "2026-11-25T00:25:04.478103",
+    "source": "espn"
+  },
+  {
+    "player": "Buchnevich, Pavel",
+    "team": "STL",
+    "team_name": "St. Louis Blues",
+    "timeline": "Day to Day",
+    "status": "OUT",
+    "reason": "Upper Body",
+    "scraped_date": "2026-11-25T00:25:04.478103",
+    "source": "espn"
+  },
+  {
+    "player": "Snuggerud, Jimmy",
+    "team": "STL",
+    "team_name": "St. Louis Blues",
+    "timeline": "Day to Day",
+    "status": "OUT",
+    "reason": "Upper Body",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -816,7 +856,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Ankle",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -826,7 +866,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Neck",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -836,7 +876,17 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Knee",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
+    "source": "espn"
+  },
+  {
+    "player": "Geekie, Conor",
+    "team": "TBL",
+    "team_name": "Tampa Bay Lightning",
+    "timeline": "Injured Reserve",
+    "status": "OUT",
+    "reason": "Shoulder",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -846,17 +896,7 @@
     "timeline": "Day to Day",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
-    "source": "espn"
-  },
-  {
-    "player": "Geekie, Conor",
-    "team": "TBL",
-    "team_name": "Tampa Bay Lightning",
-    "timeline": "Injured Reserve",
-    "status": "OUT",
-    "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -866,17 +906,17 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
     "player": "Roslovic, Jack",
     "team": "TOR",
     "team_name": "Toronto Maple Leafs",
-    "timeline": "Out",
+    "timeline": "Day to Day",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -886,7 +926,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -896,7 +936,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -906,7 +946,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -916,7 +956,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -926,7 +966,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Undisclosed",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -936,7 +976,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -946,7 +986,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Back",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -956,7 +996,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Elbow",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -966,7 +1006,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Shoulder",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -976,7 +1016,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Knee",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -986,7 +1026,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -996,7 +1036,7 @@
     "timeline": "Out",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -1006,7 +1046,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -1016,7 +1056,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -1026,7 +1066,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Shoulder",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -1036,7 +1076,7 @@
     "timeline": "Day to Day",
     "status": "OUT",
     "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -1046,7 +1086,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -1056,7 +1096,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Undisclosed",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -1066,7 +1106,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Undisclosed",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -1076,17 +1116,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Hip",
-    "scraped_date": "2026-11-24T02:49:03.782392",
-    "source": "espn"
-  },
-  {
-    "player": "Kyrou, Jordan",
-    "team": "WSH",
-    "team_name": "Washington Capitals",
-    "timeline": "Out",
-    "status": "OUT",
-    "reason": "Upper Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -1096,7 +1126,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Abdomen",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -1106,7 +1136,17 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Knee",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
+    "source": "espn"
+  },
+  {
+    "player": "Kyrou, Jordan",
+    "team": "WSH",
+    "team_name": "Washington Capitals",
+    "timeline": "Out",
+    "status": "OUT",
+    "reason": "Upper Body",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -1116,7 +1156,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -1126,7 +1166,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Undisclosed",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -1136,7 +1176,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Lower Body",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   },
   {
@@ -1146,7 +1186,7 @@
     "timeline": "Injured Reserve",
     "status": "OUT",
     "reason": "Pectoral",
-    "scraped_date": "2026-11-24T02:49:03.782392",
+    "scraped_date": "2026-11-25T00:25:04.478103",
     "source": "espn"
   }
 ]
